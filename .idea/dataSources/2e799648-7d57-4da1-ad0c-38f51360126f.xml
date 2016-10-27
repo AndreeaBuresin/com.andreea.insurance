@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - insurance_project@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="insurance_project">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="msg_cv"/>
+    <schema id="4" name="msg_project"/>
+    <schema id="5" name="msg_training"/>
+    <schema id="6" name="mysql"/>
+    <schema id="7" name="performance_schema"/>
+    <schema id="8" name="phpmyadmin"/>
+    <schema id="9" name="produse"/>
+    <schema id="10" name="test"/>
+    <table id="11" parent="1" name="claims"/>
+    <table id="12" parent="1" name="customer"/>
+    <table id="13" parent="1" name="employee"/>
+    <table id="14" parent="1" name="homepolicy"/>
+    <table id="15" parent="1" name="lifepolicy"/>
+    <table id="16" parent="1" name="policy"/>
+    <table id="17" parent="1" name="rcapolicy"/>
+    <table id="18" parent="1" name="vehicle"/>
+    <table id="19" parent="1" name="address"/>
+    <column id="20" parent="11" name="idclaims">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="21" parent="11" name="claimsType">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="22" parent="11" name="damages">
+      <mandatory>1</mandatory>
+      <data-type>decimal(2)|0</data-type>
+    </column>
+    <column id="23" parent="11" name="moralDamages">
+      <mandatory>1</mandatory>
+      <data-type>decimal(2)|0</data-type>
+    </column>
+    <column id="24" parent="11" name="losses">
+      <mandatory>1</mandatory>
+      <data-type>decimal(2)|0</data-type>
+    </column>
+    <column id="25" parent="11" name="idPolicy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="26" parent="11" name="idPolicy_idx">
+      <columns>idPolicy</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="27" parent="11" name="PRIMARY">
+      <columns>idclaims</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="28" parent="11" name="idPolicy">
+      <columns>idPolicy</columns>
+      <ref-key>~.policy.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="29" parent="12" name="idcustomer">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="30" parent="12" name="firstName">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="31" parent="12" name="lastName">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="32" parent="12" name="cnp">
+      <mandatory>1</mandatory>
+      <data-type>bigint(13)|0</data-type>
+    </column>
+    <column id="33" parent="12" name="age">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="34" parent="12" name="adress">
+      <mandatory>1</mandatory>
+      <data-type>longtext|0</data-type>
+    </column>
+    <index id="35" parent="12" name="cnp_UNIQUE">
+      <columns>cnp</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="36" parent="12" name="PRIMARY">
+      <columns>idcustomer</columns>
+      <primary>1</primary>
+    </key>
+    <key id="37" parent="12" name="cnp_UNIQUE">
+      <columns>cnp</columns>
+      <underlying-index>cnp_UNIQUE</underlying-index>
+    </key>
+    <column id="38" parent="13" name="employeeId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="39" parent="13" name="firstName">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="40" parent="13" name="lastName">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="41" parent="13" name="loginId">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="42" parent="13" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="43" parent="13" name="cnp">
+      <mandatory>1</mandatory>
+      <data-type>bigint(13)|0</data-type>
+    </column>
+    <column id="44" parent="13" name="beginningDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="45" parent="13" name="employeeType">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <index id="46" parent="13" name="cnp_UNIQUE">
+      <columns>cnp</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="47" parent="13" name="PRIMARY">
+      <columns>employeeId</columns>
+      <primary>1</primary>
+    </key>
+    <key id="48" parent="13" name="cnp_UNIQUE">
+      <columns>cnp</columns>
+      <underlying-index>cnp_UNIQUE</underlying-index>
+    </key>
+    <column id="49" parent="14" name="idhomePolicy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="50" parent="14" name="homeType">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="51" parent="14" name="homeAdress">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="52" parent="14" name="startDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="53" parent="14" name="endDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="54" parent="14" name="idCustomerH">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="55" parent="14" name="idPolicyH">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="56" parent="14" name="idCustomerH_idx">
+      <columns>idCustomerH</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="57" parent="14" name="idPolicyH_idx">
+      <columns>idPolicyH</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="58" parent="14" name="PRIMARY">
+      <columns>idhomePolicy</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="59" parent="14" name="idCustomerH">
+      <columns>idCustomerH</columns>
+      <ref-key>~.customer.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="60" parent="14" name="idPolicyH">
+      <columns>idPolicyH</columns>
+      <ref-key>~.policy.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="61" parent="15" name="idlifePolicy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="62" parent="15" name="startDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="63" parent="15" name="endDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="64" parent="15" name="idCustomerL">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="65" parent="15" name="idPolicyL">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="66" parent="15" name="customerIdL_idx">
+      <columns>idCustomerL</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="67" parent="15" name="idPolicyL_idx">
+      <columns>idPolicyL</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="68" parent="15" name="PRIMARY">
+      <columns>idlifePolicy</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="69" parent="15" name="idCustomerL">
+      <columns>idCustomerL</columns>
+      <ref-key>~.customer.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="70" parent="15" name="idPolicyL">
+      <columns>idPolicyL</columns>
+      <ref-key>~.policy.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="71" parent="16" name="policyId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="72" parent="16" name="policyType">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="73" parent="16" name="amount">
+      <mandatory>1</mandatory>
+      <data-type>decimal(2)|0</data-type>
+    </column>
+    <column id="74" parent="16" name="discount">
+      <mandatory>1</mandatory>
+      <data-type>decimal(2)|0</data-type>
+    </column>
+    <column id="75" parent="16" name="employeeId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="76" parent="16" name="customerId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="77" parent="16" name="customerId_idx">
+      <columns>customerId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="78" parent="16" name="employeeId_idx">
+      <columns>employeeId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="79" parent="16" name="PRIMARY">
+      <columns>policyId</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="80" parent="16" name="employeeId">
+      <columns>employeeId</columns>
+      <ref-key>~.employee.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="81" parent="16" name="customerId">
+      <columns>customerId</columns>
+      <ref-key>~.customer.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="82" parent="17" name="idrcaPolicy">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="83" parent="17" name="startDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="84" parent="17" name="endDate">
+      <mandatory>1</mandatory>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="85" parent="17" name="discount">
+      <data-type>decimal(2)|0</data-type>
+    </column>
+    <column id="86" parent="17" name="idCustomerR">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="87" parent="17" name="idPolicyR">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="88" parent="17" name="idCustomerR_idx">
+      <columns>idCustomerR</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="89" parent="17" name="idPolicyR_idx">
+      <columns>idPolicyR</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="90" parent="17" name="PRIMARY">
+      <columns>idrcaPolicy</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="91" parent="17" name="idCustomerR">
+      <columns>idCustomerR</columns>
+      <ref-key>~.customer.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="92" parent="17" name="idPolicyR">
+      <columns>idPolicyR</columns>
+      <ref-key>~.policy.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="93" parent="18" name="vehicleId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="94" parent="18" name="type">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="95" parent="18" name="model">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="96" parent="18" name="cilindree">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="97" parent="18" name="kw">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="98" parent="18" name="seats">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="99" parent="18" name="identificationNo">
+      <mandatory>1</mandatory>
+      <data-type>bigint(17)|0</data-type>
+    </column>
+    <column id="100" parent="18" name="registrationNo">
+      <mandatory>1</mandatory>
+      <data-type>varchar(45)|0</data-type>
+    </column>
+    <column id="101" parent="18" name="claimsId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="102" parent="18" name="policyId">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="103" parent="18" name="claimsId_idx">
+      <columns>claimsId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="104" parent="18" name="identificationNo_UNIQUE">
+      <columns>identificationNo</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="105" parent="18" name="policyId_idx">
+      <columns>policyId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="106" parent="18" name="registrationNo_UNIQUE">
+      <columns>registrationNo</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="107" parent="18" name="PRIMARY">
+      <columns>vehicleId</columns>
+      <primary>1</primary>
+    </key>
+    <key id="108" parent="18" name="identificationNo_UNIQUE">
+      <columns>identificationNo</columns>
+      <underlying-index>identificationNo_UNIQUE</underlying-index>
+    </key>
+    <key id="109" parent="18" name="registrationNo_UNIQUE">
+      <columns>registrationNo</columns>
+      <underlying-index>registrationNo_UNIQUE</underlying-index>
+    </key>
+    <foreign-key id="110" parent="18" name="policyId">
+      <columns>policyId</columns>
+      <ref-key>~.policy.PRIMARY</ref-key>
+      <cascade-update-rule>no_action</cascade-update-rule>
+      <cascade-delete-rule>no_action</cascade-delete-rule>
+    </foreign-key>
+    <column id="111" parent="19" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="112" parent="19" name="town">
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="113" parent="19" name="street">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="114" parent="19" name="number">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="115" parent="19" name="ap">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+  </database-model>
+</dataSource>
