@@ -23,7 +23,7 @@ public class Vallidation {
 
     public static boolean isPositiveDouble(String number) {
         if (isDouble(number)) {
-            int i = Integer.parseInt(number);
+            double i = Double.parseDouble(number);
             if (i >= 0) {
                 return true;
             }
