@@ -84,22 +84,14 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `insurance_project`.`claims`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `insurance_project`.`claims` (
-  `idclaims` INT(11) NOT NULL,
-  `claimsType` VARCHAR(45) NOT NULL,
-  `damages` DECIMAL(2,0) NOT NULL,
-  `moralDamages` DECIMAL(2,0) NOT NULL,
-  `losses` DECIMAL(2,0) NOT NULL,
-  `idPolicy` INT(11) NOT NULL,
-  PRIMARY KEY (`idclaims`),
-  INDEX `idPolicy_idx` (`idPolicy` ASC),
-  CONSTRAINT `idPolicy`
-    FOREIGN KEY (`idPolicy`)
-    REFERENCES `insurance_project`.`policy` (`policyId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+ALTER TABLE `insurance_project`.`claims`
+  DROP FOREIGN KEY `idPolicy`;
+ALTER TABLE `insurance_project`.`claims`
+  DROP COLUMN `idPolicy`,
+  CHANGE COLUMN `idclaims` `id` INT(11) NOT NULL ,
+  CHANGE COLUMN `claimsType` `type` VARCHAR(45) NOT NULL ,
+  DROP INDEX `idPolicy_idx` , RENAME TO  `insurance_project`.`claim` ;
+
 
 
 -- -----------------------------------------------------

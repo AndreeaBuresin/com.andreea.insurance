@@ -1,5 +1,7 @@
 package asigurari.data.model;
 
+import java.time.LocalDate;
+
 /**
  * Created by buresina on 26/10/2016.
  */
@@ -8,6 +10,20 @@ public class Policy {
     String type;
     double amount;
     double discount;
+    LocalDate startDate;
+    LocalDate endDate;
+
+    Person personCustomer;
+    Person personEmployee;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getType() {
         return type;
@@ -33,35 +49,20 @@ public class Policy {
         this.discount = discount;
     }
 
-    public int getId() {
-        return id;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Policy)) return false;
-
-        Policy policy = (Policy) o;
-
-        if (id != policy.id) return false;
-        if (Double.compare(policy.amount, amount) != 0) return false;
-        if (Double.compare(policy.discount, discount) != 0) return false;
-        return type != null ? type.equals(policy.type) : policy.type == null;
-
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        temp = Double.doubleToLongBits(amount);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(discount);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        return result;
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     @Override
@@ -71,6 +72,10 @@ public class Policy {
                 ", type='" + type + '\'' +
                 ", amount=" + amount +
                 ", discount=" + discount +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", personCustomer=" + personCustomer +
+                ", personEmployee=" + personEmployee +
                 '}';
     }
 }

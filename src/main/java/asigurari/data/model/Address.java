@@ -4,9 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/**
- * Created by andreea on 27.10.2016.
- */
 @Entity
 public class Address {
 
@@ -21,8 +18,8 @@ public class Address {
     @Column(name = "number")
     int number;
 
-    @Column(name = "ap")
-    int ap;
+    @Column(name = "apartment")
+    int apartment;
 
 
     public String getTown() {
@@ -49,12 +46,12 @@ public class Address {
         this.number = number;
     }
 
-    public int getAp() {
-        return ap;
+    public int getApartment() {
+        return apartment;
     }
 
-    public void setAp(int ap) {
-        this.ap = ap;
+    public void setApartment(int apartment) {
+        this.apartment = apartment;
     }
 
     public int getId() {
@@ -68,7 +65,7 @@ public class Address {
                 ", town='" + town + '\'' +
                 ", street='" + street + '\'' +
                 ", number=" + number +
-                ", ap=" + ap +
+                ", ap=" + apartment +
                 '}';
     }
 }

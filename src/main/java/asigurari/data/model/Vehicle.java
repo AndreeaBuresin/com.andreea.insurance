@@ -2,18 +2,33 @@ package asigurari.data.model;
 
 
 public class Vehicle {
-    private int id;
+    private long identificationNo;
+    private String registrationNo;
     private String type;
     private String vehicleModel;
     private int cylinders;
     private int kw;
     private int seats;
-    private long identificationNo;
-    private String registrationNo;
 
-//    claimsID;
-//    policyId;
 
+    Claim claim;
+    Policy policy;
+
+    public long getIdentificationNo() {
+        return identificationNo;
+    }
+
+    public void setIdentificationNo(long identificationNo) {
+        this.identificationNo = identificationNo;
+    }
+
+    public String getRegistrationNo() {
+        return registrationNo;
+    }
+
+    public void setRegistrationNo(String registrationNo) {
+        this.registrationNo = registrationNo;
+    }
 
     public String getType() {
         return type;
@@ -55,69 +70,16 @@ public class Vehicle {
         this.seats = seats;
     }
 
-    public long getIdentificationNo() {
-        return identificationNo;
-    }
-
-    public void setIdentificationNo(long identificationNo) {
-        this.identificationNo = identificationNo;
-    }
-
-    public String getRegistrationNo() {
-        return registrationNo;
-    }
-
-    public void setRegistrationNo(String registrationNo) {
-        this.registrationNo = registrationNo;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Vehicle)) return false;
-
-        Vehicle vehicle = (Vehicle) o;
-
-        if (id != vehicle.id) return false;
-        if (cylinders != vehicle.cylinders) return false;
-        if (kw != vehicle.kw) return false;
-        if (seats != vehicle.seats) return false;
-        if (identificationNo != vehicle.identificationNo) return false;
-        if (type != null ? !type.equals(vehicle.type) : vehicle.type != null) return false;
-        if (vehicleModel != null ? !vehicleModel.equals(vehicle.vehicleModel) : vehicle.vehicleModel != null)
-            return false;
-        return registrationNo != null ? registrationNo.equals(vehicle.registrationNo) : vehicle.registrationNo == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (vehicleModel != null ? vehicleModel.hashCode() : 0);
-        result = 31 * result + cylinders;
-        result = 31 * result + kw;
-        result = 31 * result + seats;
-        result = 31 * result + (int) (identificationNo ^ (identificationNo >>> 32));
-        result = 31 * result + (registrationNo != null ? registrationNo.hashCode() : 0);
-        return result;
-    }
-
     @Override
     public String toString() {
         return "Vehicle{" +
-                "id=" + id +
+                "identificationNo=" + identificationNo +
+                ", registrationNo='" + registrationNo + '\'' +
                 ", type='" + type + '\'' +
                 ", vehicleModel='" + vehicleModel + '\'' +
                 ", cylinders=" + cylinders +
                 ", kw=" + kw +
                 ", seats=" + seats +
-                ", identificationNo=" + identificationNo +
-                ", registrationNo='" + registrationNo + '\'' +
                 '}';
     }
 }
