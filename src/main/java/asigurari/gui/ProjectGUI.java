@@ -15,8 +15,8 @@ public class ProjectGUI extends JFrame implements ActionListener{
     protected JTextField stradaTextField;
     protected JLabel numarLabel;
     protected JTextField numarTextField;
-    protected JLabel apLabel;
-    protected JTextField apTextField;
+    protected JLabel apartmentLabel;
+    protected JTextField apartmentTextField;
 
 
     @Override
