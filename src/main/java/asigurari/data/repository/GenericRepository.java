@@ -41,4 +41,11 @@ public class GenericRepository<T> implements IController<T> {
         entityManager.getTransaction().commit();
 
     }
+    public List<T> findByColumn(String column, String property) throws Exception{
+
+        String q = "select t from " + clazz.getSimpleName() + " t where t." + column + "='" + property + "'";
+        Query query = entityManager.createQuery(q, clazz);
+        return query.getResultList();
+
+    }
 }

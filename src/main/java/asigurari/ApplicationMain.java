@@ -4,15 +4,17 @@ import asigurari.controller.ControllerFactory;
 import asigurari.controller.IController;
 import asigurari.data.model.*;
 import asigurari.data.repository.GenericRepository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.lang.String;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,9 +30,11 @@ public class ApplicationMain {
         ApplicationMain application = new ApplicationMain();
         application.run();
     }
+
     ApplicationMain() {
         consoleReader = new BufferedReader(new InputStreamReader(System.in));
     }
+
     private final static Logger LOGGER = LogManager.getLogger();
 
     static {
@@ -61,10 +65,10 @@ public class ApplicationMain {
                     case 0:
                         break;
                     case 1:
-                        createUser();
+                        createPerson();
                         break;
                     case 2:
-                        deleteUser();
+                        deletePerson();
                         break;
                     case 3:
                         createPolicy();
@@ -76,10 +80,10 @@ public class ApplicationMain {
                         deletePolicy();
                         break;
                     case 6:
-                        createCustomer();
+                        createUser();
                         break;
                     case 7:
-                        deleteCustomer();
+                        deleteUser();
                         break;
                     case 8:
                         createFinancialOrder();
@@ -114,19 +118,128 @@ public class ApplicationMain {
         closeEntityManagerObjects();
     }
 
+    private void createPerson() throws Exception {
+
+        Person person = new Person();
+        boolean isValid = true;
+        do {
+            String cnp = read("Please enter the CNP: ");
+            if (Vallidation.cnpValidation(cnp)) {
+                isValid = true;
+                long nr = Long.parseLong(cnp);
+
+                List<Person> personListByCNP = personController.findByColumn("CNP", String.valueOf(nr));
+                if (personListByCNP.size() == 0) {
+                    person.setCnp(nr);
+                } else {
+                    System.out.println("This CNP number exist in our database, you can not duplicate it!");
+                    isValid = false;
+                }
+            } else {
+                isValid = false;
+                System.out.println("Your CNP is not a valid one!");
+            }
+        } while (isValid == false);
+
+        do {
+            String userFirstName = read("Please enter the first name" +
+                    "\n(a string name with minimum of 3 characters and maximum of 20 characters, with uppercase for first letter): ");
+            if (Vallidation.nameValidation(userFirstName)) {
+                isValid = true;
+                person.setFirstName(userFirstName);
+            } else {
+                isValid = false;
+                System.out.println("The entered first name is not a valid one!");
+            }
+        } while (isValid == false);
+
+        do {
+            String userLastName = read("Please enter the last name"
+                    + "\n(a string name with minimum of 3 characters and maximum of 20 characters and with uppercase for first letter): ");
+            if (Vallidation.nameValidation(userLastName)) {
+                isValid = true;
+                person.setLastName(userLastName);
+            } else {
+                isValid = false;
+                System.out.println("Your last name is not a valid one!");
+            }
+        } while (isValid == false);
+
+        do {
+
+        } while (isValid == false);
+
+        do {
+            String phone = read("Please enter the phone number: ");
+            if (Vallidation.isPhoneNumber(phone)) {
+                isValid = true;
+                long nr = Long.parseLong(phone);
+                person.setPhoneNo(nr);
+            } else {
+                isValid = false;
+                System.out.println("This phone number is not a valid one!");
+            }
+        } while (isValid == false);
+
+        do {
+            String mail = read("Please enter the e-mail: ");
+            if (Vallidation.isEmail(mail)) {
+                isValid = true;
+                person.setEmail(mail);
+            } else {
+                isValid = false;
+                System.out.println("This e-mail is not a valid one!");
+            }
+        } while (isValid == false);
+
+        do {
+
+        } while (isValid == false);
+
+        do {
+
+        } while (isValid == false);
+
+        do {
+
+        } while (isValid == false);
+
+        personController.save(person);
+    }
+
+    private void deletePerson() {
+
+    }
+
+    private void updatePolicy() {
+
+    }
+
     private void deletePolicy() {
 
     }
 
-    private void deleteCustomer() {
-
-    }
-
-    private void deleteClaim() {
+    private void createUser() {
 
     }
 
     private void deleteUser() {
+
+    }
+
+    private void createFinancialOrder() {
+
+    }
+
+    private void createClaim() {
+
+    }
+
+    private void updateClaim() {
+
+    }
+
+    private void deleteClaim() {
 
     }
 
@@ -139,30 +252,6 @@ public class ApplicationMain {
     }
 
     private void searchForVehicles() {
-
-    }
-
-    private void updateClaim() {
-
-    }
-
-    private void updatePolicy() {
-
-    }
-
-    private void createClaim() {
-
-    }
-
-    private void createFinancialOrder() {
-
-    }
-
-    private void createCustomer() {
-
-    }
-
-    private void createUser() {
 
     }
 

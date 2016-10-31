@@ -11,6 +11,7 @@ public interface IController<T> {
 
     List<T> findAll() throws Exception;
 
+    List<T> findByColumn(String column, String property) throws Exception;
 
     void save(T entity) throws Exception;
 

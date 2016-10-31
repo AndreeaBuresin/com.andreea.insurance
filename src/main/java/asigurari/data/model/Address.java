@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class Address {
 
     @Id
-    int id;  //id-ul va reprezenta id-ul entitatii de care apartine adresa respectiva
+    int id;  //id-ul va reprezinta id-ul entitatii de care apartine adresa respectiva
     @Column (name="town")
     String town;
 

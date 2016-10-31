@@ -8,13 +8,9 @@ import java.time.LocalDate;
 public class Person {
     private String firstName;
     private String lastName;
-    private PersonType personType;
     private long cnp;
     private long phoneNo;
     private String email;
-    private String login;
-    private String password;
-    private LocalDate contractDate;
     private Address address;
 
 
@@ -58,20 +54,13 @@ public class Person {
         this.email = email;
     }
 
-    public String getLogin() {
-        return login;
+
+    public Address getAddress() {
+        return address;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
@@ -82,8 +71,7 @@ public class Person {
                 ", cnp=" + cnp +
                 ", phoneNo=" + phoneNo +
                 ", email='" + email + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
+                ", address=" + address +
                 '}';
     }
 }

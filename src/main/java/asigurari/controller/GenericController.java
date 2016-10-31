@@ -20,6 +20,9 @@ public class GenericController<T> implements IController<T>{
         return repository.findAll();
     }
 
+    public List<T> findByColumn(String column, String property) throws Exception{
+        return repository.findByColumn(column, property);
+    }
 
     public void save(T entity) throws Exception{
         repository.save(entity);
