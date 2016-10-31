@@ -152,53 +152,40 @@
     <column id="49" parent="13" name="email">
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="50" parent="13" name="loginUser">
-      <mandatory>1</mandatory>
-      <data-type>varchar(45)|0</data-type>
-    </column>
-    <column id="51" parent="13" name="password">
-      <mandatory>1</mandatory>
-      <data-type>varchar(45)|0</data-type>
-    </column>
-    <column id="52" parent="13" name="contractDate">
-      <mandatory>1</mandatory>
-      <data-type>date|0</data-type>
-    </column>
-    <index id="53" parent="13" name="cnp_UNIQUE">
-      <columns>cnp</columns>
-      <desc-columns></desc-columns>
-      <unique>1</unique>
-    </index>
-    <index id="54" parent="13" name="loginUser_UNIQUE">
-      <columns>loginUser</columns>
-      <desc-columns></desc-columns>
-      <unique>1</unique>
-    </index>
-    <key id="55" parent="13" name="PRIMARY">
-      <columns>cnp</columns>
-      <primary>1</primary>
-    </key>
-    <key id="56" parent="13" name="cnp_UNIQUE">
-      <columns>cnp</columns>
-      <underlying-index>cnp_UNIQUE</underlying-index>
-    </key>
-    <key id="57" parent="13" name="loginUser_UNIQUE">
-      <columns>loginUser</columns>
-      <underlying-index>loginUser_UNIQUE</underlying-index>
-    </key>
-    <column id="58" parent="14" name="id">
+    <column id="50" parent="13" name="addressId">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="59" parent="14" name="amount">
+    <index id="51" parent="13" name="addressId_idx">
+      <columns>addressId</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="52" parent="13" name="cnp_UNIQUE">
+      <columns>cnp</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="53" parent="13" name="PRIMARY">
+      <columns>cnp</columns>
+      <primary>1</primary>
+    </key>
+    <key id="54" parent="13" name="cnp_UNIQUE">
+      <columns>cnp</columns>
+      <underlying-index>cnp_UNIQUE</underlying-index>
+    </key>
+    <column id="55" parent="14" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="56" parent="14" name="amount">
       <mandatory>1</mandatory>
       <data-type>decimal(2)|0</data-type>
     </column>
-    <column id="60" parent="14" name="account">
+    <column id="57" parent="14" name="account">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <key id="61" parent="14" name="PRIMARY">
+    <key id="58" parent="14" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
