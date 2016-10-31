@@ -1,6 +1,5 @@
 package asigurari;
 
-
 import asigurari.controller.ControllerFactory;
 import asigurari.controller.IController;
 import asigurari.data.model.*;
@@ -11,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.lang.String;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +22,7 @@ import static org.apache.logging.log4j.core.appender.rolling.CompositeTriggering
 
 public class ApplicationMain {
     public static void main(String[] args) {
+
         System.out.println("Running the application...");
 
         ApplicationMain application = new ApplicationMain();
@@ -45,7 +46,6 @@ public class ApplicationMain {
 
 
     private BufferedReader consoleReader;
-
 
     private void run() {
 

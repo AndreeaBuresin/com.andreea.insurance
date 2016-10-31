@@ -8,6 +8,7 @@ import asigurari.controller.IController;
 public class RepoFactory {
 
     public static IController createRepo(Class tClass) {
+
         return new GenericRepository(tClass);
     }
 }

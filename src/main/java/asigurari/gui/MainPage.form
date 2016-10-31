@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="asigurari.gui.MainPage">
+  <grid id="27dc6" binding="Welcome" layout-manager="FormLayout">
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="fill:d:grow"/>
+    <constraints>
+      <xy x="20" y="20" width="670" height="227"/>
+    </constraints>
+    <properties>
+      <background color="-8223857"/>
+      <doubleBuffered value="false"/>
+      <font style="1"/>
+      <foreground color="-8223857"/>
+      <name value="passwordText"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <component id="13b69" class="javax.swing.JLabel" binding="usernameLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="1" left="1" bottom="1" right="1" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <autoscrolls value="false"/>
+          <background color="-15789035"/>
+          <doubleBuffered value="false"/>
+          <focusTraversalPolicyProvider value="false"/>
+          <font style="1"/>
+          <foreground color="-14932698"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <iconTextGap value="30"/>
+          <inheritsPopupMenu value="false"/>
+          <labelFor value=""/>
+          <maximumSize width="10000" height="50000"/>
+          <name value="usernameLabel"/>
+          <nextFocusableComponent value="27dc6"/>
+          <preferredSize width="400" height="40"/>
+          <text value="Username"/>
+        </properties>
+        <clientProperties>
+          <html.disable class="java.lang.Boolean" value="false"/>
+        </clientProperties>
+      </component>
+      <component id="f7f4a" class="javax.swing.JFormattedTextField" binding="insertYourUsernameFormattedTextField" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="1" left="1" bottom="1" right="1" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <alignmentX value="1.0"/>
+          <alignmentY value="1.0"/>
+          <background color="-919817"/>
+          <caretColor color="-1904652"/>
+          <caretPosition value="20"/>
+          <disabledTextColor color="-14932698"/>
+          <dragEnabled value="true"/>
+          <editable value="true"/>
+          <font style="0"/>
+          <foreground color="-3946295"/>
+          <horizontalAlignment value="0"/>
+          <margin top="1" left="1" bottom="1" right="1"/>
+          <name value="userNameText"/>
+          <opaque value="true"/>
+          <preferredSize width="300" height="40"/>
+          <requestFocusEnabled value="false"/>
+          <selectedTextColor color="-723724"/>
+          <selectionColor color="-1510154"/>
+          <text value="insert your username"/>
+        </properties>
+      </component>
+      <component id="6879f" class="javax.swing.JLabel" binding="passwordLabel" custom-create="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <forms top="1" left="1" bottom="1" right="1" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <alignmentX value="1.0"/>
+          <font style="1"/>
+          <foreground color="-14932698"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <iconTextGap value="5"/>
+          <maximumSize width="100000" height="50000"/>
+          <minimumSize width="100" height="40"/>
+          <name value="Password"/>
+          <opaque value="false"/>
+          <preferredSize width="400" height="40"/>
+          <text value="Password"/>
+        </properties>
+      </component>
+      <component id="5c4ca" class="javax.swing.JFormattedTextField" binding="insertYourPasswordFormattedTextField" default-binding="true">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms top="1" left="1" bottom="1" right="1" defaultalign-horz="false"/>
+        </constraints>
+        <properties>
+          <alignmentX value="1.0"/>
+          <alignmentY value="1.0"/>
+          <autoscrolls value="false"/>
+          <background color="-1904654"/>
+          <caretColor color="-789517"/>
+          <disabledTextColor color="-3946295"/>
+          <dragEnabled value="true"/>
+          <horizontalAlignment value="0"/>
+          <inheritsPopupMenu value="false"/>
+          <margin top="1" left="1" bottom="1" right="1"/>
+          <name value="passwordText"/>
+          <opaque value="true"/>
+          <preferredSize width="400" height="40"/>
+          <selectedTextColor color="-3946295"/>
+          <selectionColor color="-1904652"/>
+          <text value="insert your password"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
