@@ -1,16 +1,24 @@
 package asigurari.data.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
 /**
  * Created by andreea on 27.10.2016.
  */
+@Entity
 public class Person {
+
     private String firstName;
     private String lastName;
+
+    @Id
     private long cnp;
+
     private long phoneNo;
     private String email;
+
     private Address address;
 
 

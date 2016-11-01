@@ -5,12 +5,23 @@
     <persistence-unit name="insurance_project" transaction-type="RESOURCE_LOCAL">
         <!-- specifies the used JPA implementation -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
 
 
         <!-- the list of managed entities -->
         <class>asigurari.data.model.Person</class>
         <class>asigurari.data.model.Address</class>
+        <class>asigurari.data.model.Associate</class>
+        <class>asigurari.data.model.Claim</class>
+        <class>asigurari.data.model.Customer</class>
+        <class>asigurari.data.model.Employee</class>
+        <class>asigurari.data.model.FinancialOrders</class>
+        <class>asigurari.data.model.FinancialOrdersType</class>
+        <class>asigurari.data.model.Health</class>
+        <class>asigurari.data.model.Policy</class>
+        <class>asigurari.data.model.PolicyType</class>
+        <class>asigurari.data.model.Vehicle</class>
 
 
         <properties>

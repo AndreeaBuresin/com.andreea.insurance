@@ -16,9 +16,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `msg_cv` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
--- Schema insuranceDB
--- -----------------------------------------------------
--- -----------------------------------------------------
 -- Schema insurance_project
 -- -----------------------------------------------------
 
@@ -71,7 +68,21 @@ CREATE TABLE IF NOT EXISTS `insurance_project`.`address` (
   `town` VARCHAR(45) NOT NULL,
   `street` VARCHAR(45) NOT NULL,
   `number` INT(11) NOT NULL,
-  `apartment` INT(11) NULL DEFAULT NULL)
+  `apartment` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `insurance_project`.`associate`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `insurance_project`.`associate` (
+  `id` INT(11) NOT NULL,
+  `user` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `contractDate` DATE NOT NULL,
+  PRIMARY KEY (`id`))
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
 
@@ -86,6 +97,28 @@ CREATE TABLE IF NOT EXISTS `insurance_project`.`claim` (
   `damages` DECIMAL(2,0) NULL DEFAULT NULL,
   `moralDamages` DECIMAL(2,0) NULL DEFAULT NULL,
   `losses` DECIMAL(2,0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `insurance_project`.`customer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `insurance_project`.`customer` (
+  `firstInsuranceDate` DATE NOT NULL)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `insurance_project`.`employee`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `insurance_project`.`employee` (
+  `id` INT(11) NOT NULL,
+  `user` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `contractDate` DATE NOT NULL,
   PRIMARY KEY (`id`))
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
@@ -112,12 +145,15 @@ CREATE TABLE IF NOT EXISTS `insurance_project`.`person` (
   `lastName` VARCHAR(45) NOT NULL,
   `phoneNo` BIGINT(10) NULL DEFAULT NULL,
   `email` VARCHAR(45) NULL DEFAULT NULL,
-  `loginUser` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `contractDate` DATE NOT NULL,
+  `addressId` INT(11) NOT NULL,
   PRIMARY KEY (`cnp`),
-  UNIQUE INDEX `loginUser_UNIQUE` (`loginUser` ASC),
-  UNIQUE INDEX `cnp_UNIQUE` (`cnp` ASC))
+  UNIQUE INDEX `cnp_UNIQUE` (`cnp` ASC),
+  INDEX `addressId_idx` (`addressId` ASC),
+  CONSTRAINT `addressId`
+  FOREIGN KEY (`addressId`)
+  REFERENCES `insurance_project`.`address` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
 
