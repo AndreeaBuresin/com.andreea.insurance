@@ -63,45 +63,40 @@ public class ApplicationMain {
                     case 1:
                         creazaPersoana();
                         break;
-//                    case 2:
-//                        deletePerson();
-//                        break;
-//                    case 3:
-//                        createPolicy();
-//                        break;
-//                    case 4:
-//                        updatePolicy();
-//                        break;
-//                    case 5:
-//                        deletePolicy();
-//                        break;
-//                    case 6:
-//                        createUser();
-//                        break;
-//                    case 7:
-//                        deleteUser();
-//                        break;
-//                    case 8:
-//                        createFinancialOrder();
-//                        break;
-//                    case 9:
-//                        createClaim();
-//                        break;
-//                    case 10:
-//                        updateClaim();
-//                        break;
-//                    case 11:
-//                        deleteClaim();
-//                        break;
-//                    case 12:
-//                        searchForPayments();
-//                        break;
-//                    case 13:
-//                        searchForClaims();
-//                        break;
-//                    case 14:
-//                        searchForVehicles();
-//                        break;
+                    case 2:
+                        creazaPolita();
+                        break;
+                    case 3:
+                        adaugaVehicol();
+                        break;
+                    case 4:
+                        adaugaDespagubire();
+                        break;
+                    case 5:
+                        adaugaPlata();
+                        break;
+                    case 6:
+                        stergePersoana();
+                        break;
+                    case 7:
+                        modificaPolita();
+                        break;
+                    case 8:
+                        raportAngajati();
+                        break;
+                    case 9:
+                        raportColaboratori();
+                        break;
+                    case 10:
+                        raportClienti();
+                        break;
+                    case 11:
+                        raportPolite();
+                        break;
+                    case 12:
+                        raportDespagubiri();
+                        break;
+
                     default:
                         System.out.printf("Unknown choice:  '%s'. Try again.  %n%n%n",
                                 choice);
@@ -203,6 +198,49 @@ public class ApplicationMain {
         persoanaController.save(persoana);
     }
 
+    private void creazaPolita() {
+
+    }
+
+    private void adaugaVehicol() {
+
+    }
+
+    private void adaugaDespagubire() {
+
+    }
+
+    private void adaugaPlata() {
+
+    }
+
+    private void stergePersoana() {
+
+    }
+
+    private void modificaPolita() {
+
+    }
+
+    private void raportAngajati() {
+
+    }
+
+    private void raportColaboratori() {
+
+    }
+
+    private void raportClienti() {
+
+    }
+
+    private void raportPolite() {
+
+    }
+
+    private void raportDespagubiri() {
+
+    }
 
     private String read(String message) {
         String result = null;
@@ -229,22 +267,19 @@ public class ApplicationMain {
     }
 
     private void showMenu() {
-        System.out.println("0. quit");
-        System.out.println("1. Create a new user");
-        System.out.println("2. Delete an user");
-        System.out.println("3. Create a new policy");
-        System.out.println("4. Update a policy");
-        System.out.println("5. Delete a policy from database");
-        System.out.println("6. Add a new customer in database");
-        System.out.println("7. Delete an existing customer");
-        System.out.println("8. Register a new financial order");
-        System.out.println("9. Create a new claim");
-        System.out.println("10.Update an existing claim");
-        System.out.println("11.Delete an existing claim");
-        System.out.println("12.Search for payments");
-        System.out.println("13.Search for an vehicle");
-        System.out.println("14.Search for a claim");
-
+        System.out.println("0. Iesire din Program.");
+        System.out.println("1. Adauga o persoana noua in baza de date.");
+        System.out.println("2. Adauga o polita noua in baza de date.");
+        System.out.println("3. Adauga un veicol asigurat in baza de date.");
+        System.out.println("4. Adauga o despagubire noua in baza de date.");
+        System.out.println("5. Adauga o plata noua in baza de date.");
+        System.out.println("6. Sterge o persoana din baza de date.");
+        System.out.println("7. Modifica o polita.");
+        System.out.println("8. Scoate raport angajati.");
+        System.out.println("9. Scoate raport colaboratori.");
+        System.out.println("10.Scoate raport clienti.");
+        System.out.println("11.Scoate raport polite din sistem.");
+        System.out.println("12.Scoate raport despagubiri.");
 
     }
 

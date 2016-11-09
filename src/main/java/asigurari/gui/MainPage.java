@@ -1,5 +1,8 @@
 package asigurari.gui;
 
+import com.jgoodies.forms.layout.CellConstraints;
+import com.jgoodies.forms.layout.FormLayout;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
@@ -80,7 +83,7 @@ public class MainPage {
     private void $$$setupUI$$$() {
         createUIComponents();
         Welcome = new JPanel();
-        Welcome.setLayout(new com.jgoodies.forms.layout.FormLayout("fill:d:grow", "center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
+        Welcome.setLayout(new FormLayout("fill:d:grow", "center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow,top:4dlu:noGrow,center:max(d;4px):noGrow"));
         Welcome.setBackground(new Color(-8223857));
         Welcome.setDoubleBuffered(false);
         Welcome.setFont(new Font(Welcome.getFont().getName(), Font.BOLD, Welcome.getFont().getSize()));
@@ -102,8 +105,8 @@ public class MainPage {
         usernameLabel.setPreferredSize(new Dimension(400, 40));
         usernameLabel.setText("Username");
         usernameLabel.putClientProperty("html.disable", Boolean.FALSE);
-        com.jgoodies.forms.layout.CellConstraints cc = new com.jgoodies.forms.layout.CellConstraints();
-        Welcome.add(usernameLabel, new com.jgoodies.forms.layout.CellConstraints(1, 1, 1, 1, com.jgoodies.forms.layout.CellConstraints.CENTER, com.jgoodies.forms.layout.CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
+        CellConstraints cc = new CellConstraints();
+        Welcome.add(usernameLabel, new CellConstraints(1, 1, 1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
         insertYourUsernameFormattedTextField = new JFormattedTextField();
         insertYourUsernameFormattedTextField.setAlignmentX(1.0f);
         insertYourUsernameFormattedTextField.setAlignmentY(1.0f);
@@ -124,7 +127,7 @@ public class MainPage {
         insertYourUsernameFormattedTextField.setSelectedTextColor(new Color(-723724));
         insertYourUsernameFormattedTextField.setSelectionColor(new Color(-1510154));
         insertYourUsernameFormattedTextField.setText("insert your username");
-        Welcome.add(insertYourUsernameFormattedTextField, new com.jgoodies.forms.layout.CellConstraints(1, 3, 1, 1, com.jgoodies.forms.layout.CellConstraints.CENTER, com.jgoodies.forms.layout.CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
+        Welcome.add(insertYourUsernameFormattedTextField, new CellConstraints(1, 3, 1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
         passwordLabel.setAlignmentX(1.0f);
         passwordLabel.setFont(new Font(passwordLabel.getFont().getName(), Font.BOLD, passwordLabel.getFont().getSize()));
         passwordLabel.setForeground(new Color(-14932698));
@@ -137,7 +140,7 @@ public class MainPage {
         passwordLabel.setOpaque(false);
         passwordLabel.setPreferredSize(new Dimension(400, 40));
         passwordLabel.setText("Password");
-        Welcome.add(passwordLabel, new com.jgoodies.forms.layout.CellConstraints(1, 5, 1, 1, com.jgoodies.forms.layout.CellConstraints.CENTER, com.jgoodies.forms.layout.CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
+        Welcome.add(passwordLabel, new CellConstraints(1, 5, 1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
         insertYourPasswordFormattedTextField = new JFormattedTextField();
         insertYourPasswordFormattedTextField.setAlignmentX(1.0f);
         insertYourPasswordFormattedTextField.setAlignmentY(1.0f);
@@ -155,7 +158,7 @@ public class MainPage {
         insertYourPasswordFormattedTextField.setSelectedTextColor(new Color(-3946295));
         insertYourPasswordFormattedTextField.setSelectionColor(new Color(-1904652));
         insertYourPasswordFormattedTextField.setText("insert your password");
-        Welcome.add(insertYourPasswordFormattedTextField, new com.jgoodies.forms.layout.CellConstraints(1, 7, 1, 1, com.jgoodies.forms.layout.CellConstraints.CENTER, com.jgoodies.forms.layout.CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
+        Welcome.add(insertYourPasswordFormattedTextField, new CellConstraints(1, 7, 1, 1, CellConstraints.CENTER, CellConstraints.DEFAULT, new Insets(1, 1, 1, 1)));
         usernameLabel.setNextFocusableComponent(Welcome);
     }
 
