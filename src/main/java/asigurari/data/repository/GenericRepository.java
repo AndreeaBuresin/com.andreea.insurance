@@ -12,7 +12,7 @@ import java.util.List;
 
 public class GenericRepository<T> implements IController<T> {
 
-    public static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("insurance_project");
+    public static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("asigurariauto_db");
     public static final EntityManager entityManager = entityManagerFactory.createEntityManager();
     private Class<T> clazz;
 

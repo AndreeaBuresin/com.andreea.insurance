@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.logging.Level;
 
 
@@ -35,6 +36,7 @@ public class ApplicationMain {
     static {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
+
     private IController<Adresa> adresaController = ControllerFactory.createController(Adresa.class);
     private IController<Chitanta> chitantaController = ControllerFactory.createController(Chitanta.class);
     private IController<Despagubire> despagubireController = ControllerFactory.createController(Despagubire.class);
@@ -42,8 +44,6 @@ public class ApplicationMain {
     private IController<Plata> plataController = ControllerFactory.createController(Plata.class);
     private IController<Polita> politaController = ControllerFactory.createController(Polita.class);
     private IController<Vehicol> vehicolController = ControllerFactory.createController(Vehicol.class);
-
-
 
     private BufferedReader consoleReader;
 
@@ -59,6 +59,7 @@ public class ApplicationMain {
                 option = Integer.parseInt(choice);
                 switch (option) {
                     case 0:
+                        System.out.println("Ati iesit din sistem!");
                         break;
                     case 1:
                         creazaPersoana();
@@ -112,14 +113,14 @@ public class ApplicationMain {
     private void creazaPersoana() throws Exception {
 
         Persoana persoana = new Persoana();
-        boolean isValid = true;
+        boolean isValid;
         do {
             String cnp = read("Please enter the CNP: ");
             if (Vallidation.cnpValidation(cnp)) {
                 isValid = true;
                 long nr = Long.parseLong(cnp);
 
-                List<Persoana> personListByCNP = persoanaController.findByColumn("CNP", String.valueOf(nr));
+                List<Persoana> personListByCNP = persoanaController.findByColumn("idpersoana(CNP)", String.valueOf(nr));
                 if (personListByCNP.size() == 0) {
                     persoana.setCnp(nr);
                 } else {
@@ -132,9 +133,43 @@ public class ApplicationMain {
             }
         } while (isValid == false);
 
+        Persoana.TipPersoana tipulPersoanei = null;
+        System.out.println("Va rugam alegeti tipul persoanei pe care doriti sa o introduceti in " +
+                "baza de date.");
         do {
-            String userNume = read("Please enter the first name" +
-                    "\n(a string name with minimum of 3 characters and maximum of 20 characters, with uppercase for first letter): ");
+            System.out.println("1. Angajat");
+            System.out.println("2. Colaborator");
+            System.out.println("3. Asigurat");
+
+            Scanner scan = new Scanner(System.in);
+            String optionString = scan.next();
+            int option = 0;
+            if (Vallidation.isPositiveInt(optionString)) {
+                option = Integer.parseInt(optionString);
+                if (option>=1 && option<=3){
+                    switch (option){
+                        case 1:{
+                            tipulPersoanei = Persoana.TipPersoana.ANGAJAT;
+                            persoana.setTipPersoana(Persoana.TipPersoana.ANGAJAT);
+                        }
+                    }
+                } else {
+
+
+
+//                tipulPersoanei == Persoana.TipPersoana.ANGAJAT ||
+//                        tipulPersoanei == Persoana.TipPersoana.COLABORATOR ||
+//                        tipulPersoanei == Persoana.TipPersoana.ASIGURAT
+
+                System.out.println("Alegerea ta nu este corecta!");
+            }
+
+        } while (isValid == false);
+
+        do {
+            String userNume = read("Va rugam introduceti numele persoanei" +
+                    "\n(a string name with minimum of 3 characters and maximum of 20 characters, " +
+                    "with uppercase for first letter): ");
             if (Vallidation.nameValidation(userNume)) {
                 isValid = true;
                 persoana.setNume(userNume);

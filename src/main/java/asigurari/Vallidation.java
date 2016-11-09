@@ -95,5 +95,11 @@ public class Vallidation {
 
         return false;
     }
+    public static boolean personTypeValidation(String personType){
+        if (personType.matches("[angajat]||[colaborator]||[client]")){
+            return true;
+        }
+        return false;
+    }
 
 }
