@@ -4,6 +4,8 @@ import asigurari.controller.ControllerFactory;
 import asigurari.controller.IController;
 import asigurari.data.model.*;
 import asigurari.data.repository.GenericRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,13 +15,6 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
-import java.lang.String;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-
-import static org.apache.logging.log4j.core.appender.rolling.CompositeTriggeringPolicy.createPolicy;
 
 
 public class ApplicationMain {
@@ -40,13 +35,14 @@ public class ApplicationMain {
     static {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.SEVERE);
     }
+    private IController<Adresa> adresaController = ControllerFactory.createController(Adresa.class);
+    private IController<Chitanta> chitantaController = ControllerFactory.createController(Chitanta.class);
+    private IController<Despagubire> despagubireController = ControllerFactory.createController(Despagubire.class);
+    private IController<Persoana> persoanaController = ControllerFactory.createController(Persoana.class);
+    private IController<Plata> plataController = ControllerFactory.createController(Plata.class);
+    private IController<Polita> politaController = ControllerFactory.createController(Polita.class);
+    private IController<Vehicol> vehicolController = ControllerFactory.createController(Vehicol.class);
 
-    private IController<Person> personController = ControllerFactory.createController(Person.class);
-    private IController<Policy> policyController = ControllerFactory.createController(Policy.class);
-    private IController<Claim> claimController = ControllerFactory.createController(Claim.class);
-    private IController<Address> addressController = ControllerFactory.createController(Address.class);
-    private IController<FinancialOrders> financialController = ControllerFactory.createController(FinancialOrders.class);
-    private IController<Vehicle> vehicleController = ControllerFactory.createController(Vehicle.class);
 
 
     private BufferedReader consoleReader;
@@ -65,47 +61,47 @@ public class ApplicationMain {
                     case 0:
                         break;
                     case 1:
-                        createPerson();
+                        creazaPersoana();
                         break;
-                    case 2:
-                        deletePerson();
-                        break;
-                    case 3:
-                        createPolicy();
-                        break;
-                    case 4:
-                        updatePolicy();
-                        break;
-                    case 5:
-                        deletePolicy();
-                        break;
-                    case 6:
-                        createUser();
-                        break;
-                    case 7:
-                        deleteUser();
-                        break;
-                    case 8:
-                        createFinancialOrder();
-                        break;
-                    case 9:
-                        createClaim();
-                        break;
-                    case 10:
-                        updateClaim();
-                        break;
-                    case 11:
-                        deleteClaim();
-                        break;
-                    case 12:
-                        searchForPayments();
-                        break;
-                    case 13:
-                        searchForClaims();
-                        break;
-                    case 14:
-                        searchForVehicles();
-                        break;
+//                    case 2:
+//                        deletePerson();
+//                        break;
+//                    case 3:
+//                        createPolicy();
+//                        break;
+//                    case 4:
+//                        updatePolicy();
+//                        break;
+//                    case 5:
+//                        deletePolicy();
+//                        break;
+//                    case 6:
+//                        createUser();
+//                        break;
+//                    case 7:
+//                        deleteUser();
+//                        break;
+//                    case 8:
+//                        createFinancialOrder();
+//                        break;
+//                    case 9:
+//                        createClaim();
+//                        break;
+//                    case 10:
+//                        updateClaim();
+//                        break;
+//                    case 11:
+//                        deleteClaim();
+//                        break;
+//                    case 12:
+//                        searchForPayments();
+//                        break;
+//                    case 13:
+//                        searchForClaims();
+//                        break;
+//                    case 14:
+//                        searchForVehicles();
+//                        break;
                     default:
                         System.out.printf("Unknown choice:  '%s'. Try again.  %n%n%n",
                                 choice);
@@ -118,9 +114,9 @@ public class ApplicationMain {
         closeEntityManagerObjects();
     }
 
-    private void createPerson() throws Exception {
+    private void creazaPersoana() throws Exception {
 
-        Person person = new Person();
+        Persoana persoana = new Persoana();
         boolean isValid = true;
         do {
             String cnp = read("Please enter the CNP: ");
@@ -128,9 +124,9 @@ public class ApplicationMain {
                 isValid = true;
                 long nr = Long.parseLong(cnp);
 
-                List<Person> personListByCNP = personController.findByColumn("CNP", String.valueOf(nr));
+                List<Persoana> personListByCNP = persoanaController.findByColumn("CNP", String.valueOf(nr));
                 if (personListByCNP.size() == 0) {
-                    person.setCnp(nr);
+                    persoana.setCnp(nr);
                 } else {
                     System.out.println("This CNP number exist in our database, you can not duplicate it!");
                     isValid = false;
@@ -142,11 +138,11 @@ public class ApplicationMain {
         } while (isValid == false);
 
         do {
-            String userFirstName = read("Please enter the first name" +
+            String userNume = read("Please enter the first name" +
                     "\n(a string name with minimum of 3 characters and maximum of 20 characters, with uppercase for first letter): ");
-            if (Vallidation.nameValidation(userFirstName)) {
+            if (Vallidation.nameValidation(userNume)) {
                 isValid = true;
-                person.setFirstName(userFirstName);
+                persoana.setNume(userNume);
             } else {
                 isValid = false;
                 System.out.println("The entered first name is not a valid one!");
@@ -154,11 +150,11 @@ public class ApplicationMain {
         } while (isValid == false);
 
         do {
-            String userLastName = read("Please enter the last name"
+            String prenume = read("Please enter the last name"
                     + "\n(a string name with minimum of 3 characters and maximum of 20 characters and with uppercase for first letter): ");
-            if (Vallidation.nameValidation(userLastName)) {
+            if (Vallidation.nameValidation(prenume)) {
                 isValid = true;
-                person.setLastName(userLastName);
+                persoana.setPrenume(prenume);
             } else {
                 isValid = false;
                 System.out.println("Your last name is not a valid one!");
@@ -170,11 +166,11 @@ public class ApplicationMain {
         } while (isValid == false);
 
         do {
-            String phone = read("Please enter the phone number: ");
-            if (Vallidation.isPhoneNumber(phone)) {
+            String telefon = read("Please enter the phone number: ");
+            if (Vallidation.isPhoneNumber(telefon)) {
                 isValid = true;
-                long nr = Long.parseLong(phone);
-                person.setPhoneNo(nr);
+                long nr = Long.parseLong(telefon);
+                persoana.setTelefon(nr);
             } else {
                 isValid = false;
                 System.out.println("This phone number is not a valid one!");
@@ -185,7 +181,7 @@ public class ApplicationMain {
             String mail = read("Please enter the e-mail: ");
             if (Vallidation.isEmail(mail)) {
                 isValid = true;
-                person.setEmail(mail);
+                persoana.setEmail(mail);
             } else {
                 isValid = false;
                 System.out.println("This e-mail is not a valid one!");
@@ -204,56 +200,9 @@ public class ApplicationMain {
 
         } while (isValid == false);
 
-        personController.save(person);
+        persoanaController.save(persoana);
     }
 
-    private void deletePerson() {
-
-    }
-
-    private void updatePolicy() {
-
-    }
-
-    private void deletePolicy() {
-
-    }
-
-    private void createUser() {
-
-    }
-
-    private void deleteUser() {
-
-    }
-
-    private void createFinancialOrder() {
-
-    }
-
-    private void createClaim() {
-
-    }
-
-    private void updateClaim() {
-
-    }
-
-    private void deleteClaim() {
-
-    }
-
-    private void searchForPayments() {
-
-    }
-
-    private void searchForClaims() {
-
-    }
-
-    private void searchForVehicles() {
-
-    }
 
     private String read(String message) {
         String result = null;

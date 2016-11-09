@@ -2,26 +2,21 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
-    <persistence-unit name="insurance_project" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="asigurariauto_db" transaction-type="RESOURCE_LOCAL">
         <!-- specifies the used JPA implementation -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+
 
 
 
         <!-- the list of managed entities -->
-        <class>asigurari.data.model.Person</class>
-        <class>asigurari.data.model.Address</class>
-        <class>asigurari.data.model.Associate</class>
-        <class>asigurari.data.model.Claim</class>
-        <class>asigurari.data.model.Customer</class>
-        <class>asigurari.data.model.Employee</class>
-        <class>asigurari.data.model.FinancialOrders</class>
-        <class>asigurari.data.model.FinancialOrdersType</class>
-        <class>asigurari.data.model.Health</class>
-        <class>asigurari.data.model.Policy</class>
-        <class>asigurari.data.model.PolicyType</class>
-        <class>asigurari.data.model.Vehicle</class>
+        <class>asigurari.data.model.Adresa</class>
+        <class>asigurari.data.model.Chitanta</class>
+        <class>asigurari.data.model.Despagubire</class>
+        <class>asigurari.data.model.Persoana</class>
+        <class>asigurari.data.model.Plata</class>
+        <class>asigurari.data.model.Polita</class>
+        <class>asigurari.data.model.Vehicol</class>
 
 
         <properties>
@@ -43,7 +38,7 @@
 
             <!-- JDBC connection details -->
             <property name="javax.persistence.jdbc.driver"   value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url"      value="jdbc:mysql://localhost/insurance_project?useSSL=false&amp;serverTimezone=Europe/Bucharest"/>
+            <property name="javax.persistence.jdbc.url"      value="jdbc:mysql://localhost/asigurariauto_db?useSSL=false&amp;serverTimezone=Europe/Bucharest"/>
             <property name="javax.persistence.jdbc.user"     value="root"/>
             <property name="javax.persistence.jdbc.password" value="mysql"/>
 

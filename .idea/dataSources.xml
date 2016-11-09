@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MySQL - insurance_project@localhost" uuid="2e799648-7d57-4da1-ad0c-38f51360126f">
+    <data-source source="LOCAL" name="MySQL - asigurariauto_db@localhost" uuid="979ebcc5-ae4f-4c87-bc2b-315c60c2849e">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/insurance_project</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/asigurariauto_db</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

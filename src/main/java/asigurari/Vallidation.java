@@ -86,5 +86,14 @@ public class Vallidation {
         }
         return false;
     }
+    public static boolean passwordValidation(String password){
+
+        if (password.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
+
+            return true;
+        }
+
+        return false;
+    }
 
 }

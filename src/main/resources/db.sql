@@ -23,6 +23,14 @@ CREATE SCHEMA IF NOT EXISTS `msg_cv` DEFAULT CHARACTER SET utf8 ;
 -- Schema insurance_project
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `insurance_project` DEFAULT CHARACTER SET utf8 ;
+-- -----------------------------------------------------
+-- Schema asigurariauto_db
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema asigurariauto_db
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `asigurariauto_db` DEFAULT CHARACTER SET utf8 ;
 USE `msg_cv` ;
 
 -- -----------------------------------------------------
@@ -68,21 +76,7 @@ CREATE TABLE IF NOT EXISTS `insurance_project`.`address` (
   `town` VARCHAR(45) NOT NULL,
   `street` VARCHAR(45) NOT NULL,
   `number` INT(11) NOT NULL,
-  `apartment` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `insurance_project`.`associate`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `insurance_project`.`associate` (
-  `id` INT(11) NOT NULL,
-  `user` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `contractDate` DATE NOT NULL,
-  PRIMARY KEY (`id`))
+  `apartment` INT(11) NULL DEFAULT NULL)
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
 
@@ -97,28 +91,6 @@ CREATE TABLE IF NOT EXISTS `insurance_project`.`claim` (
   `damages` DECIMAL(2,0) NULL DEFAULT NULL,
   `moralDamages` DECIMAL(2,0) NULL DEFAULT NULL,
   `losses` DECIMAL(2,0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`))
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `insurance_project`.`customer`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `insurance_project`.`customer` (
-  `firstInsuranceDate` DATE NOT NULL)
-  ENGINE = InnoDB
-  DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `insurance_project`.`employee`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `insurance_project`.`employee` (
-  `id` INT(11) NOT NULL,
-  `user` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `contractDate` DATE NOT NULL,
   PRIMARY KEY (`id`))
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
@@ -145,15 +117,8 @@ CREATE TABLE IF NOT EXISTS `insurance_project`.`person` (
   `lastName` VARCHAR(45) NOT NULL,
   `phoneNo` BIGINT(10) NULL DEFAULT NULL,
   `email` VARCHAR(45) NULL DEFAULT NULL,
-  `addressId` INT(11) NOT NULL,
   PRIMARY KEY (`cnp`),
-  UNIQUE INDEX `cnp_UNIQUE` (`cnp` ASC),
-  INDEX `addressId_idx` (`addressId` ASC),
-  CONSTRAINT `addressId`
-  FOREIGN KEY (`addressId`)
-  REFERENCES `insurance_project`.`address` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `cnp_UNIQUE` (`cnp` ASC))
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
 
@@ -186,6 +151,192 @@ CREATE TABLE IF NOT EXISTS `insurance_project`.`vehicle` (
   PRIMARY KEY (`identificationNo`),
   UNIQUE INDEX `identificationNo_UNIQUE` (`identificationNo` ASC),
   UNIQUE INDEX `registrationNo_UNIQUE` (`registrationNo` ASC))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+USE `asigurariauto_db` ;
+
+-- -----------------------------------------------------
+-- Table `asigurariauto_db`.`persoana`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`persoana` (
+  `idpersoana(CNP)` BIGINT(13) NOT NULL,
+  `tipPersoana` VARCHAR(45) NOT NULL,
+  `nume` VARCHAR(20) NOT NULL,
+  `prenume` VARCHAR(20) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `telefon` BIGINT(10) NOT NULL,
+  PRIMARY KEY (`idpersoana(CNP)`),
+  UNIQUE INDEX `idperson_UNIQUE` (`idpersoana(CNP)` ASC))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `asigurariauto_db`.`vehicol`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`vehicol` (
+  `idSerieSasiu` VARCHAR(17) NOT NULL,
+  `nrIdentificare` VARCHAR(7) NOT NULL,
+  `marca` VARCHAR(15) NOT NULL,
+  `model` VARCHAR(15) NOT NULL,
+  `combustibil` VARCHAR(15) NOT NULL,
+  `cilindri` INT(11) NOT NULL,
+  `kw` INT(11) NOT NULL,
+  `masaMaxAsigurata` INT(11) NOT NULL,
+  `dataFabricatie` DATE NOT NULL,
+  `accident` INT(11) NOT NULL,
+  `sumaAsigurata` DECIMAL(4,0) NOT NULL,
+  PRIMARY KEY (`idSerieSasiu`),
+  UNIQUE INDEX `idIdentificareNr_UNIQUE` (`nrIdentificare` ASC),
+  UNIQUE INDEX `serieSasiu_UNIQUE` (`idSerieSasiu` ASC))
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `asigurariauto_db`.`chitanta`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`chitanta` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `data` DATE NOT NULL,
+  `suma` DECIMAL(4,0) NOT NULL,
+  `descriere` VARCHAR(45) NOT NULL,
+  `discount` DECIMAL(4,0) NULL DEFAULT NULL,
+  `persoanaId` BIGINT(13) NOT NULL,
+  `politaId` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `persoanaId_idx` (`persoanaId` ASC),
+  INDEX `politaId_idx` (`politaId` ASC),
+  CONSTRAINT `persoanaId`
+  FOREIGN KEY (`persoanaId`)
+  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `politaId`
+  FOREIGN KEY (`politaId`)
+  REFERENCES `asigurariauto_db`.`polita` (`idpolita`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `asigurariauto_db`.`polita`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`polita` (
+  `idpolita` INT(11) NOT NULL AUTO_INCREMENT,
+  `dataInceput` DATE NOT NULL,
+  `dataSfarsit` DATE NOT NULL,
+  `nrChitanta` INT(11) NOT NULL,
+  `vehicolId` VARCHAR(17) NOT NULL,
+  `idAsigurat` BIGINT(13) NOT NULL,
+  PRIMARY KEY (`idpolita`),
+  UNIQUE INDEX `idpolita_UNIQUE` (`idpolita` ASC),
+  INDEX `nrChitanta_idx` (`nrChitanta` ASC),
+  INDEX `idVehicol_idx` (`vehicolId` ASC),
+  INDEX `idAsigurat_idx` (`idAsigurat` ASC),
+  CONSTRAINT `idAsigurat`
+  FOREIGN KEY (`idAsigurat`)
+  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idVehicol`
+  FOREIGN KEY (`vehicolId`)
+  REFERENCES `asigurariauto_db`.`vehicol` (`idSerieSasiu`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `nrChitanta`
+  FOREIGN KEY (`nrChitanta`)
+  REFERENCES `asigurariauto_db`.`chitanta` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `asigurariauto_db`.`adresa`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`adresa` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `oras` VARCHAR(20) NOT NULL,
+  `strada` VARCHAR(45) NOT NULL,
+  `numar` INT(11) NOT NULL,
+  `idPersoana` BIGINT(13) NOT NULL,
+  `idPolitaAdress` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `idPersoana_idx` (`idPersoana` ASC),
+  INDEX `idPolitaAdress_idx` (`idPolitaAdress` ASC),
+  CONSTRAINT `idPersoana`
+  FOREIGN KEY (`idPersoana`)
+  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idPolitaAdress`
+  FOREIGN KEY (`idPolitaAdress`)
+  REFERENCES `asigurariauto_db`.`polita` (`idpolita`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `asigurariauto_db`.`despagubire`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`despagubire` (
+  `iddespagubire` INT(11) NOT NULL AUTO_INCREMENT,
+  `dataDespagubire` DATE NOT NULL,
+  `sumaDespagubire` DECIMAL(4,0) NOT NULL,
+  `descriereAvarii` VARCHAR(45) NOT NULL,
+  `idPolitaValabila` INT(11) NOT NULL,
+  `idPersoanaImplicata` BIGINT(13) NULL DEFAULT NULL,
+  PRIMARY KEY (`iddespagubire`),
+  UNIQUE INDEX `iddespagubire_UNIQUE` (`iddespagubire` ASC),
+  INDEX `idPolitaValabila_idx` (`idPolitaValabila` ASC),
+  INDEX `idPersoanaImplicata_idx` (`idPersoanaImplicata` ASC),
+  CONSTRAINT `idPersoanaImplicata`
+  FOREIGN KEY (`idPersoanaImplicata`)
+  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idPolitaValabila`
+  FOREIGN KEY (`idPolitaValabila`)
+  REFERENCES `asigurariauto_db`.`polita` (`idpolita`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+  ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `asigurariauto_db`.`plata`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`plata` (
+  `idplati` INT(11) NOT NULL AUTO_INCREMENT,
+  `salar` DECIMAL(4,0) NULL DEFAULT NULL,
+  `comisionS` DECIMAL(4,0) NULL DEFAULT NULL,
+  `comision` DECIMAL(4,0) NULL DEFAULT NULL,
+  `despagubireId` INT(11) NULL DEFAULT NULL,
+  `persoanaPlatitaId` BIGINT(13) NOT NULL,
+  PRIMARY KEY (`idplati`),
+  UNIQUE INDEX `idplati_UNIQUE` (`idplati` ASC),
+  INDEX `persoanaPlatitaId_idx` (`persoanaPlatitaId` ASC),
+  INDEX `despagubireId_idx` (`despagubireId` ASC),
+  CONSTRAINT `despagubireId`
+  FOREIGN KEY (`despagubireId`)
+  REFERENCES `asigurariauto_db`.`despagubire` (`iddespagubire`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `persoanaPlatitaId`
+  FOREIGN KEY (`persoanaPlatitaId`)
+  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
 
