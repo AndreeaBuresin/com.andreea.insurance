@@ -160,15 +160,24 @@ USE `asigurariauto_db` ;
 -- Table `asigurariauto_db`.`persoana`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`persoana` (
-  `idpersoana(CNP)` BIGINT(13) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `cnp` BIGINT(13) NOT NULL,
   `tipPersoana` VARCHAR(45) NOT NULL,
   `nume` VARCHAR(20) NOT NULL,
   `prenume` VARCHAR(20) NOT NULL,
-  `email` VARCHAR(45) NOT NULL,
-  `telefon` BIGINT(10) NOT NULL,
-  PRIMARY KEY (`idpersoana(CNP)`),
-  UNIQUE INDEX `idperson_UNIQUE` (`idpersoana(CNP)` ASC))
+  `email` VARCHAR(45) NULL DEFAULT NULL,
+  `telefon` BIGINT(10) NULL DEFAULT NULL,
+  `nrPolita` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `idpersoana(CNP)_UNIQUE` (`cnp` ASC),
+  INDEX `politaId_idx` (`nrPolita` ASC),
+  CONSTRAINT `nrPolita`
+  FOREIGN KEY (`nrPolita`)
+  REFERENCES `asigurariauto_db`.`polita` (`idpolita`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
   ENGINE = InnoDB
+  AUTO_INCREMENT = 2
   DEFAULT CHARACTER SET = utf8;
 
 
@@ -176,20 +185,28 @@ CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`persoana` (
 -- Table `asigurariauto_db`.`vehicol`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`vehicol` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
   `idSerieSasiu` VARCHAR(17) NOT NULL,
   `nrIdentificare` VARCHAR(7) NOT NULL,
   `marca` VARCHAR(15) NOT NULL,
-  `model` VARCHAR(15) NOT NULL,
-  `combustibil` VARCHAR(15) NOT NULL,
+  `model` VARCHAR(15) NULL DEFAULT NULL,
+  `combustibil` VARCHAR(15) NULL DEFAULT NULL,
   `cilindri` INT(11) NOT NULL,
   `kw` INT(11) NOT NULL,
-  `masaMaxAsigurata` INT(11) NOT NULL,
+  `masaMaxAsigurata` INT(11) NULL DEFAULT NULL,
   `dataFabricatie` DATE NOT NULL,
   `accident` INT(11) NOT NULL,
   `sumaAsigurata` DECIMAL(4,0) NOT NULL,
-  PRIMARY KEY (`idSerieSasiu`),
+  `proprietar/asigurat` INT(11) NOT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE INDEX `idIdentificareNr_UNIQUE` (`nrIdentificare` ASC),
-  UNIQUE INDEX `serieSasiu_UNIQUE` (`idSerieSasiu` ASC))
+  UNIQUE INDEX `serieSasiu_UNIQUE` (`idSerieSasiu` ASC),
+  INDEX `proprietar/Asigurat_idx` (`proprietar/asigurat` ASC),
+  CONSTRAINT `proprietar/Asigurat`
+  FOREIGN KEY (`proprietar/asigurat`)
+  REFERENCES `asigurariauto_db`.`persoana` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
 
@@ -211,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`chitanta` (
   INDEX `politaId_idx` (`politaId` ASC),
   CONSTRAINT `persoanaId`
   FOREIGN KEY (`persoanaId`)
-  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+  REFERENCES `asigurariauto_db`.`persoana` (`cnp`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `politaId`
@@ -232,15 +249,22 @@ CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`polita` (
   `dataSfarsit` DATE NOT NULL,
   `nrChitanta` INT(11) NOT NULL,
   `vehicolId` VARCHAR(17) NOT NULL,
-  `idAsigurat` BIGINT(13) NOT NULL,
+  `idAsigurat` INT(11) NULL DEFAULT NULL,
+  `idAngajat` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`idpolita`),
   UNIQUE INDEX `idpolita_UNIQUE` (`idpolita` ASC),
   INDEX `nrChitanta_idx` (`nrChitanta` ASC),
   INDEX `idVehicol_idx` (`vehicolId` ASC),
   INDEX `idAsigurat_idx` (`idAsigurat` ASC),
+  INDEX `idAngajat_idx` (`idAngajat` ASC),
+  CONSTRAINT `idAngajat`
+  FOREIGN KEY (`idAngajat`)
+  REFERENCES `asigurariauto_db`.`persoana` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
   CONSTRAINT `idAsigurat`
   FOREIGN KEY (`idAsigurat`)
-  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+  REFERENCES `asigurariauto_db`.`persoana` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `idVehicol`
@@ -265,17 +289,12 @@ CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`adresa` (
   `oras` VARCHAR(20) NOT NULL,
   `strada` VARCHAR(45) NOT NULL,
   `numar` INT(11) NOT NULL,
-  `idPersoana` BIGINT(13) NOT NULL,
+  `idPersoana` INT(11) NOT NULL,
   `idPolitaAdress` INT(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
-  INDEX `idPersoana_idx` (`idPersoana` ASC),
   INDEX `idPolitaAdress_idx` (`idPolitaAdress` ASC),
-  CONSTRAINT `idPersoana`
-  FOREIGN KEY (`idPersoana`)
-  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+  INDEX `idPersoana_idx` (`idPersoana` ASC),
   CONSTRAINT `idPolitaAdress`
   FOREIGN KEY (`idPolitaAdress`)
   REFERENCES `asigurariauto_db`.`polita` (`idpolita`)
@@ -301,7 +320,7 @@ CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`despagubire` (
   INDEX `idPersoanaImplicata_idx` (`idPersoanaImplicata` ASC),
   CONSTRAINT `idPersoanaImplicata`
   FOREIGN KEY (`idPersoanaImplicata`)
-  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+  REFERENCES `asigurariauto_db`.`persoana` (`cnp`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `idPolitaValabila`
@@ -334,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `asigurariauto_db`.`plata` (
     ON UPDATE NO ACTION,
   CONSTRAINT `persoanaPlatitaId`
   FOREIGN KEY (`persoanaPlatitaId`)
-  REFERENCES `asigurariauto_db`.`persoana` (`idpersoana(CNP)`)
+  REFERENCES `asigurariauto_db`.`persoana` (`cnp`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
   ENGINE = InnoDB

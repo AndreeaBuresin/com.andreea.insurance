@@ -48,4 +48,6 @@ public class GenericRepository<T> implements IController<T> {
         return query.getResultList();
 
     }
+
+
 }

@@ -27,8 +27,17 @@ public class Persoana implements Serializable{
     @Column(name = "telefon", length = 10)
     private  long telefon;
 
-    @Column
+
+    @Column(name = "tipPersoana")
     private TipPersoana tipPersoana;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public long getCnp() {
         return cnp;
@@ -74,14 +83,13 @@ public class Persoana implements Serializable{
         this.tipPersoana = tipPersoana;
     }
 
-    public enum TipPersoana{
-        ANGAJAT, COLABORATOR, ASIGURAT
-    }
-    //persoanaType
-    @Enumerated(EnumType.STRING)
-    public TipPersoana getTipPersoana(){
+    public TipPersoana getTipPersoana() {
         return tipPersoana;
     }
+
+    //persoanaType
+    @Enumerated(EnumType.STRING)
+
 
     @Override
     public String toString() {
@@ -94,4 +102,6 @@ public class Persoana implements Serializable{
                 ", tipPersoana=" + tipPersoana +
                 '}';
     }
+
+
 }

@@ -99,7 +99,7 @@ public class ApplicationMain {
                         break;
 
                     default:
-                        System.out.printf("Unknown choice:  '%s'. Try again.  %n%n%n",
+                        System.out.printf("Alegere necunoscuta:  '%s'. Incearca din nou.  %n%n%n",
                                 choice);
                 }
             } catch (Exception ioe) {
@@ -110,33 +110,36 @@ public class ApplicationMain {
         closeEntityManagerObjects();
     }
 
+
     private void creazaPersoana() throws Exception {
 
         Persoana persoana = new Persoana();
         boolean isValid;
-        do {
-            String cnp = read("Please enter the CNP: ");
-            if (Vallidation.cnpValidation(cnp)) {
-                isValid = true;
-                long nr = Long.parseLong(cnp);
 
-                List<Persoana> personListByCNP = persoanaController.findByColumn("idpersoana(CNP)", String.valueOf(nr));
-                if (personListByCNP.size() == 0) {
+        do {
+            String cnpNr = read("Va rugam introduceti CNP-ul: ");
+            if (Vallidation.cnpValidation(cnpNr)) {
+                isValid = true;
+                //long nr = Long.parseLong(cnpNr);
+                System.out.println("cnp " +cnpNr);
+
+                List<Persoana> personsByCNP = persoanaController.findByColumn("cnp", cnpNr);
+                if (personsByCNP.isEmpty()) {
+                    long nr = Long.parseLong(cnpNr);
                     persoana.setCnp(nr);
                 } else {
-                    System.out.println("This CNP number exist in our database, you can not duplicate it!");
+                    System.out.println("Acest CNP exista deja in baza noastra de date!");
                     isValid = false;
                 }
             } else {
                 isValid = false;
-                System.out.println("Your CNP is not a valid one!");
+                System.out.println("CNP-ul dvs nu este unul valid!");
             }
         } while (isValid == false);
 
-        Persoana.TipPersoana tipulPersoanei = null;
-        System.out.println("Va rugam alegeti tipul persoanei pe care doriti sa o introduceti in " +
-                "baza de date.");
         do {
+            System.out.println("Va rugam alegeti tipul persoanei pe care doriti sa o introduceti in " +
+                    "baza de date.");
             System.out.println("1. Angajat");
             System.out.println("2. Colaborator");
             System.out.println("3. Asigurat");
@@ -146,25 +149,27 @@ public class ApplicationMain {
             int option = 0;
             if (Vallidation.isPositiveInt(optionString)) {
                 option = Integer.parseInt(optionString);
-                if (option>=1 && option<=3){
-                    switch (option){
-                        case 1:{
-                            tipulPersoanei = Persoana.TipPersoana.ANGAJAT;
-                            persoana.setTipPersoana(Persoana.TipPersoana.ANGAJAT);
-                        }
+                if (option >= 1 && option <= 3) {
+                    switch (option) {
+                        case 1:
+                            persoana.setTipPersoana(TipPersoana.ANGAJAT);
+                            break;
+                        case 2:
+                            persoana.setTipPersoana(TipPersoana.COLABORATOR);
+                            break;
+                        case 3:
+                            persoana.setTipPersoana(TipPersoana.ASIGURAT);
+                            break;
                     }
                 } else {
 
-
-
-//                tipulPersoanei == Persoana.TipPersoana.ANGAJAT ||
-//                        tipulPersoanei == Persoana.TipPersoana.COLABORATOR ||
-//                        tipulPersoanei == Persoana.TipPersoana.ASIGURAT
-
-                System.out.println("Alegerea ta nu este corecta!");
+                    System.out.println("Alegerea ta nu este corecta!");
+                }
+            } else {
+                System.out.println("Alege un numar din lista de mai sus");
             }
-
-        } while (isValid == false);
+        }
+        while (isValid == false);
 
         do {
             String userNume = read("Va rugam introduceti numele persoanei" +
@@ -191,9 +196,6 @@ public class ApplicationMain {
             }
         } while (isValid == false);
 
-        do {
-
-        } while (isValid == false);
 
         do {
             String telefon = read("Please enter the phone number: ");
@@ -203,35 +205,25 @@ public class ApplicationMain {
                 persoana.setTelefon(nr);
             } else {
                 isValid = false;
-                System.out.println("This phone number is not a valid one!");
+                System.out.println("Acest numar de telefon nu este valid!");
             }
         } while (isValid == false);
 
         do {
-            String mail = read("Please enter the e-mail: ");
+            String mail = read("Va rugam introduceti o adresa de e-mail: ");
             if (Vallidation.isEmail(mail)) {
                 isValid = true;
                 persoana.setEmail(mail);
             } else {
                 isValid = false;
-                System.out.println("This e-mail is not a valid one!");
+                System.out.println("Acest e-mail nu este valid!");
             }
         } while (isValid == false);
 
-        do {
-
-        } while (isValid == false);
-
-        do {
-
-        } while (isValid == false);
-
-        do {
-
-        } while (isValid == false);
 
         persoanaController.save(persoana);
     }
+
 
     private void creazaPolita() {
 
@@ -294,7 +286,7 @@ public class ApplicationMain {
     }
 
     private String promptAction() throws Exception {
-        System.out.println("Choose a category from the above list: ");
+        System.out.println("Va rugam alegeti o categorie din lista de mai sus: ");
         System.out.println();
 
         String choice = consoleReader.readLine();
