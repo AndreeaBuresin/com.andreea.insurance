@@ -8,7 +8,11 @@ import java.io.Serializable;
 public class Persoana implements Serializable{
 
     @Id
-    @Column(name = "idpersoana(CNP)")
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    int id;
+
+    @Column(name = "cnp")
     private long cnp;
 
     @Column(name = "nume", length = 20)

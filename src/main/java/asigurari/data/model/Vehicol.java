@@ -1,9 +1,6 @@
 package asigurari.data.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -12,10 +9,14 @@ import java.time.LocalDate;
 public class Vehicol implements Serializable {
 
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    int id;
+
     @Column(name = "idSerieSasiu")
     int serieSasiu;
 
-    @Column(name = "inrIdentificare")
+    @Column(name = "nrIdentificare")
     String nrIdentificare;
 
     @Column(name = "marca")
@@ -33,7 +34,7 @@ public class Vehicol implements Serializable {
     @Column(name = "kw")
     int kw;
 
-    @Column(name = "masaMaxAutorizata")
+    @Column(name = "masaMaxAsigurata")
     int masaMaxAutorizata;
 
     @Column(name = "dataFabricatie")
