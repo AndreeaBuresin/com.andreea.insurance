@@ -150,12 +150,16 @@ public class ApplicationMain {
                 if (option >= 1 && option <= 3) {
                     switch (option) {
                         case 1:
+                            String persAngajat = "Angajat";
+                            TipPersoana.valueOf(persAngajat);
                             persoana.setTipPersoana(TipPersoana.ANGAJAT);
                             break;
                         case 2:
+                            TipPersoana.valueOf("Colaborator");
                             persoana.setTipPersoana(TipPersoana.COLABORATOR);
                             break;
                         case 3:
+                            TipPersoana.valueOf("Asigurat");
                             persoana.setTipPersoana(TipPersoana.ASIGURAT);
                             break;
                     }
