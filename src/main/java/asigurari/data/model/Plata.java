@@ -9,7 +9,7 @@ public class Plata implements Serializable {
 
     @Id
     @Column(name = "idplati", length = 11)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @Column(name = "salar")

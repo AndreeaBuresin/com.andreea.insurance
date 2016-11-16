@@ -120,8 +120,6 @@ public class ApplicationMain {
             String cnpNr = read("Va rugam introduceti CNP-ul: ");
             if (Vallidation.cnpValidation(cnpNr)) {
                 isValid = true;
-                //long nr = Long.parseLong(cnpNr);
-                System.out.println("cnp " +cnpNr);
 
                 List<Persoana> personsByCNP = persoanaController.findByColumn("cnp", cnpNr);
                 if (personsByCNP.isEmpty()) {
@@ -162,43 +160,42 @@ public class ApplicationMain {
                             break;
                     }
                 } else {
-
-                    System.out.println("Alegerea ta nu este corecta!");
+                    System.out.println("Alegerea dvs nu este corecta!");
                 }
             } else {
-                System.out.println("Alege un numar din lista de mai sus");
+                System.out.println("Alegeti un numar din lista de mai sus");
             }
         }
         while (isValid == false);
 
         do {
-            String userNume = read("Va rugam introduceti numele persoanei" +
-                    "\n(a string name with minimum of 3 characters and maximum of 20 characters, " +
-                    "with uppercase for first letter): ");
-            if (Vallidation.nameValidation(userNume)) {
+            String numelepersoanei = read("Va rugam introduceti numele " +
+                    "\n(numele trebuie sa fie un cuvant de minim 3 si maxim 20 litere, " +
+                    "numele trebuie sa inceapa cu litera mare):\n");
+            if (Vallidation.nameValidation(numelepersoanei)) {
                 isValid = true;
-                persoana.setNume(userNume);
+                persoana.setNume(numelepersoanei);
             } else {
                 isValid = false;
-                System.out.println("The entered first name is not a valid one!");
+                System.out.println("Numele introdus nu este valid!");
             }
         } while (isValid == false);
 
         do {
-            String prenume = read("Please enter the last name"
-                    + "\n(a string name with minimum of 3 characters and maximum of 20 characters and with uppercase for first letter): ");
-            if (Vallidation.nameValidation(prenume)) {
+            String prenumelePersoanei = read("Va rugam introduceti prenumele"
+                    + "\n(numele trebuie sa fie un cuvant de minim 3 si maxim 20 litere, " +
+                    "numele trebuie sa inceapa cu litera mare):\n");
+            if (Vallidation.nameValidation(prenumelePersoanei)) {
                 isValid = true;
-                persoana.setPrenume(prenume);
+                persoana.setPrenume(prenumelePersoanei);
             } else {
                 isValid = false;
-                System.out.println("Your last name is not a valid one!");
+                System.out.println("Prenumele introdus nu este valid!");
             }
         } while (isValid == false);
 
-
         do {
-            String telefon = read("Please enter the phone number: ");
+            String telefon = read("Va rugam introduceti numarul dvs de telefon: ");
             if (Vallidation.isPhoneNumber(telefon)) {
                 isValid = true;
                 long nr = Long.parseLong(telefon);
@@ -219,8 +216,7 @@ public class ApplicationMain {
                 System.out.println("Acest e-mail nu este valid!");
             }
         } while (isValid == false);
-
-
+        System.out.println(persoana);
         persoanaController.save(persoana);
     }
 

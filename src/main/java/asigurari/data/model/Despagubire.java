@@ -10,7 +10,7 @@ public class Despagubire implements Serializable{
 
     @Id
     @Column(name = "iddespagubire", length = 11)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @Column(name = "dataDespagubire")

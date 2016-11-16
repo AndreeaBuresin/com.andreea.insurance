@@ -9,7 +9,7 @@ public class Polita {
 
     @Id
     @Column(name = "idpolita", length = 11)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
     @Column(name = "dataInceput")
