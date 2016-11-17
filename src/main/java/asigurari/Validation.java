@@ -1,7 +1,7 @@
 package asigurari;
 
 
-public class Vallidation {
+public class Validation {
     public static boolean isPositiveInt(String number) {
         if (isInt(number)) {
             int i = Integer.parseInt(number);

@@ -118,7 +118,7 @@ public class ApplicationMain {
 
         do {
             String cnpNr = read("Va rugam introduceti CNP-ul: ");
-            if (Vallidation.cnpValidation(cnpNr)) {
+            if (Validation.cnpValidation(cnpNr)) {
                 isValid = true;
 
                 List<Persoana> personsByCNP = persoanaController.findByColumn("cnp", cnpNr);
@@ -145,23 +145,26 @@ public class ApplicationMain {
             Scanner scan = new Scanner(System.in);
             String optionString = scan.next();
             int option = 0;
-            if (Vallidation.isPositiveInt(optionString)) {
+            if (Validation.isPositiveInt(optionString)) {
                 option = Integer.parseInt(optionString);
                 if (option >= 1 && option <= 3) {
-                    switch (option) {
-                        case 1:
-                            String persAngajat = "Angajat";
-                            TipPersoana.valueOf(persAngajat);
-                            persoana.setTipPersoana(TipPersoana.ANGAJAT);
-                            break;
-                        case 2:
-                            TipPersoana.valueOf("Colaborator");
-                            persoana.setTipPersoana(TipPersoana.COLABORATOR);
-                            break;
-                        case 3:
-                            TipPersoana.valueOf("Asigurat");
-                            persoana.setTipPersoana(TipPersoana.ASIGURAT);
-                            break;
+                    for (TipPersoana tipPersoana : TipPersoana.values()) {
+                        switch (option) {
+
+                            case 1:
+                                tipPersoana = TipPersoana.ANGAJAT;
+                                persoana.setTipPersoana(tipPersoana);
+                                break;
+                            case 2:
+                                tipPersoana = TipPersoana.COLABORATOR;
+                                persoana.setTipPersoana(tipPersoana);
+                                break;
+                            case 3:
+                                tipPersoana = TipPersoana.ASIGURAT;
+                                persoana.setTipPersoana(tipPersoana);
+                                break;
+
+                        }
                     }
                 } else {
                     System.out.println("Alegerea dvs nu este corecta!");
@@ -176,7 +179,7 @@ public class ApplicationMain {
             String numelepersoanei = read("Va rugam introduceti numele " +
                     "\n(numele trebuie sa fie un cuvant de minim 3 si maxim 20 litere, " +
                     "numele trebuie sa inceapa cu litera mare):\n");
-            if (Vallidation.nameValidation(numelepersoanei)) {
+            if (Validation.nameValidation(numelepersoanei)) {
                 isValid = true;
                 persoana.setNume(numelepersoanei);
             } else {
@@ -189,7 +192,7 @@ public class ApplicationMain {
             String prenumelePersoanei = read("Va rugam introduceti prenumele"
                     + "\n(numele trebuie sa fie un cuvant de minim 3 si maxim 20 litere, " +
                     "numele trebuie sa inceapa cu litera mare):\n");
-            if (Vallidation.nameValidation(prenumelePersoanei)) {
+            if (Validation.nameValidation(prenumelePersoanei)) {
                 isValid = true;
                 persoana.setPrenume(prenumelePersoanei);
             } else {
@@ -200,7 +203,7 @@ public class ApplicationMain {
 
         do {
             String telefon = read("Va rugam introduceti numarul dvs de telefon: ");
-            if (Vallidation.isPhoneNumber(telefon)) {
+            if (Validation.isPhoneNumber(telefon)) {
                 isValid = true;
                 long nr = Long.parseLong(telefon);
                 persoana.setTelefon(nr);
@@ -212,7 +215,7 @@ public class ApplicationMain {
 
         do {
             String mail = read("Va rugam introduceti o adresa de e-mail: ");
-            if (Vallidation.isEmail(mail)) {
+            if (Validation.isEmail(mail)) {
                 isValid = true;
                 persoana.setEmail(mail);
             } else {
@@ -241,9 +244,25 @@ public class ApplicationMain {
 
     }
 
-    private void stergePersoana() {
+    private void stergePersoana() throws Exception {
+        persoanaController.findAll();
+        String persoanaIdString;
+        do {
+            System.out.println("Introduceti id-ul persoanei pe care doriti sa o stergeti din baza de date: ");
+            persoanaIdString = consoleReader.readLine();
+        } while (!Validation.isPositiveInt(persoanaIdString));
+        int persoanaId = Integer.parseInt(persoanaIdString);
+        Persoana persoana = persoanaController.findById(persoanaId);
+        if (persoana != null) {
+            persoanaController.delete(persoana);
+        } else {
+            System.out.println("Persoana cautata nu exista in baza noastra de date!");
+            stergePersoana();
+        }
 
     }
+
+
 
     private void modificaPolita() {
 

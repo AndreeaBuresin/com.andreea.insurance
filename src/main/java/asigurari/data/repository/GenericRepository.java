@@ -49,5 +49,21 @@ public class GenericRepository<T> implements IController<T> {
 
     }
 
+    public void update(T entity) {
+        if (!entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().begin();
+        }
+        entityManager.merge(entity);
+        entityManager.getTransaction().commit();
+    }
+
+    public void delete(T entity) {
+        if (!entityManager.getTransaction().isActive()) {
+            entityManager.getTransaction().begin();
+        }
+        entityManager.remove(entity);
+        entityManager.getTransaction().commit();
+    }
+
 
 }

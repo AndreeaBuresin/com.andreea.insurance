@@ -15,4 +15,7 @@ public interface IController<T> {
 
     void save(T entity) throws Exception;
 
+    void update(T entity) throws Exception;
+
+    void delete(T entity) throws Exception;
 }

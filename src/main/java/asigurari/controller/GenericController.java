@@ -27,4 +27,11 @@ public class GenericController<T> implements IController<T>{
     public void save(T entity) throws Exception{
         repository.save(entity);
     }
+    public void update(T entity) throws Exception {
+        repository.update(entity);
+    }
+
+    public void delete(T entity) throws Exception {
+        repository.delete(entity);
+    }
 }
