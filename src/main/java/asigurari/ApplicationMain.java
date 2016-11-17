@@ -131,7 +131,7 @@ public class ApplicationMain {
                 }
             } else {
                 isValid = false;
-                System.out.println("CNP-ul dvs nu este unul valid!");
+                System.out.println("CNP-ul introdus nu este unul valid!");
             }
         } while (isValid == false);
 
@@ -210,7 +210,7 @@ public class ApplicationMain {
         } while (isValid == false);
 
         do {
-            String telefon = read("Va rugam introduceti numarul dvs de telefon: ");
+            String telefon = read("Va rugam introduceti numarul de telefon: ");
             if (Validation.isPhoneNumber(telefon)) {
                 isValid = true;
                 long nr = Long.parseLong(telefon);
@@ -228,7 +228,7 @@ public class ApplicationMain {
                 persoana.setEmail(mail);
             } else {
                 isValid = false;
-                System.out.println("Acest e-mail nu este valid!");
+                System.out.println("Aceasta adresa de e-mail nu este valida!");
             }
         } while (isValid == false);
         System.out.println(persoana);
