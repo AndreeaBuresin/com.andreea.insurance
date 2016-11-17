@@ -151,27 +151,25 @@ public class ApplicationMain {
 
                         switch (option) {
                             case 1:
-                                for (TipPersoana tipPersoana: TipPersoana.values()) {
-                                    tipPersoana.setValue("Angajat");
-
-                                    //tipPersoana = TipPersoana.ANGAJAT;
-
-                                    persoana.setTipPersoana(TipPersoana.ANGAJAT);
+                                for (TipPersoana tipulPersoana: TipPersoana.values()) {
+                                    tipulPersoana = TipPersoana.ANGAJAT;
+                                    tipulPersoana.setValue("Angajat");
+                                    persoana.setTipPersoana(tipulPersoana);
                                 }
                                 break;
                             case 2:
-                                for (TipPersoana tipPersoana : TipPersoana.values()) {
-                                    tipPersoana = TipPersoana.COLABORATOR;
-                                    tipPersoana.setValue("Colaborator");
-                                    persoana.setTipPersoana(tipPersoana);
-                                }
+//                                for (TipPersoana tipPersoana : TipPersoana.values()) {
+//                                    tipPersoana = TipPersoana.COLABORATOR;
+//                                    tipPersoana.setValue("Colaborator");
+//                                    persoana.setTipPersoana(tipPersoana);
+//                                }
                                 break;
                             case 3:
-                                for (TipPersoana tipPersoana : TipPersoana.values()) {
-                                    tipPersoana = TipPersoana.ASIGURAT;
-                                    tipPersoana.setValue("Asigurat");
-                                    persoana.setTipPersoana(tipPersoana);
-                                }
+//                                for (TipPersoana tipPersoana : TipPersoana.values()) {
+//                                    tipPersoana = TipPersoana.ASIGURAT;
+//                                    tipPersoana.setValue("Asigurat");
+//                                    persoana.setTipPersoana(tipPersoana);
+//                                }
                                 break;
                     }
                 } else {
@@ -259,7 +257,6 @@ public class ApplicationMain {
         String persoanaIdString;
 
         do {
-
             System.out.println("Introduceti id-ul persoanei pe care doriti sa o stergeti din baza de date: ");
             System.out.println(persoanaController.findAll());
             persoanaIdString = consoleReader.readLine();
