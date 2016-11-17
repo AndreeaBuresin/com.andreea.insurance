@@ -148,23 +148,31 @@ public class ApplicationMain {
             if (Validation.isPositiveInt(optionString)) {
                 option = Integer.parseInt(optionString);
                 if (option >= 1 && option <= 3) {
-                    for (TipPersoana tipPersoana : TipPersoana.values()) {
-                        switch (option) {
 
+                        switch (option) {
                             case 1:
-                                tipPersoana = TipPersoana.ANGAJAT;
-                                persoana.setTipPersoana(tipPersoana);
+                                for (TipPersoana tipPersoana: TipPersoana.values()) {
+                                    tipPersoana.setValue("Angajat");
+
+                                    //tipPersoana = TipPersoana.ANGAJAT;
+
+                                    persoana.setTipPersoana(TipPersoana.ANGAJAT);
+                                }
                                 break;
                             case 2:
-                                tipPersoana = TipPersoana.COLABORATOR;
-                                persoana.setTipPersoana(tipPersoana);
+                                for (TipPersoana tipPersoana : TipPersoana.values()) {
+                                    tipPersoana = TipPersoana.COLABORATOR;
+                                    tipPersoana.setValue("Colaborator");
+                                    persoana.setTipPersoana(tipPersoana);
+                                }
                                 break;
                             case 3:
-                                tipPersoana = TipPersoana.ASIGURAT;
-                                persoana.setTipPersoana(tipPersoana);
+                                for (TipPersoana tipPersoana : TipPersoana.values()) {
+                                    tipPersoana = TipPersoana.ASIGURAT;
+                                    tipPersoana.setValue("Asigurat");
+                                    persoana.setTipPersoana(tipPersoana);
+                                }
                                 break;
-
-                        }
                     }
                 } else {
                     System.out.println("Alegerea dvs nu este corecta!");
@@ -230,6 +238,7 @@ public class ApplicationMain {
 
     private void creazaPolita() {
 
+
     }
 
     private void adaugaVehicol() {
@@ -245,11 +254,16 @@ public class ApplicationMain {
     }
 
     private void stergePersoana() throws Exception {
+
         persoanaController.findAll();
         String persoanaIdString;
+
         do {
+
             System.out.println("Introduceti id-ul persoanei pe care doriti sa o stergeti din baza de date: ");
+            System.out.println(persoanaController.findAll());
             persoanaIdString = consoleReader.readLine();
+
         } while (!Validation.isPositiveInt(persoanaIdString));
         int persoanaId = Integer.parseInt(persoanaIdString);
         Persoana persoana = persoanaController.findById(persoanaId);

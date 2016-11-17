@@ -31,8 +31,9 @@ public class Persoana implements Serializable{
     @Column(name = "tipPersoana")
     private TipPersoana tipPersoana;
 
+
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -40,7 +41,7 @@ public class Persoana implements Serializable{
     }
 
     public long getCnp() {
-        return cnp;
+        return this.cnp;
     }
 
     public void setCnp(long cnp) {
@@ -48,7 +49,7 @@ public class Persoana implements Serializable{
     }
 
     public String getNume() {
-        return nume;
+        return this.nume;
     }
 
     public void setNume(String nume) {
@@ -56,7 +57,7 @@ public class Persoana implements Serializable{
     }
 
     public String getPrenume() {
-        return prenume;
+        return this.prenume;
     }
 
     public void setPrenume(String prenume) {
@@ -64,7 +65,7 @@ public class Persoana implements Serializable{
     }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -72,36 +73,60 @@ public class Persoana implements Serializable{
     }
 
     public long getTelefon() {
-        return telefon;
+        return this.telefon;
     }
 
     public void setTelefon(long telefon) {
         this.telefon = telefon;
     }
 
+    public TipPersoana getTipPersoana() {
+        return this.tipPersoana;
+    }
+
     public void setTipPersoana(TipPersoana tipPersoana) {
         this.tipPersoana = tipPersoana;
     }
 
-    public TipPersoana getTipPersoana() {
-        return tipPersoana;
-    }
-
-    //persoanaType
-    @Enumerated(EnumType.STRING)
-
-
     @Override
     public String toString() {
         return "Persoana{" +
-                "cnp=" + cnp +
-                ", nume='" + nume + '\'' +
-                ", prenume='" + prenume + '\'' +
-                ", email='" + email + '\'' +
-                ", telefon=" + telefon +
-                ", tipPersoana=" + tipPersoana +
+                "\nid: " + id +
+                ", cnp: " + cnp +
+                ", nume: '" + nume + '\'' +
+                ", prenume: '" + prenume + '\'' +
+                ", email: " + email + '\'' +
+                ", telefon: " + telefon +
+                ", tipPersoana: " + tipPersoana +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Persoana)) return false;
 
+        Persoana persoana = (Persoana) o;
+
+        if (this.id != persoana.id) return false;
+        if (this.cnp != persoana.cnp) return false;
+        if (this.telefon != persoana.telefon) return false;
+        if (this.nume != null ? !this.nume.equals(persoana.nume) : persoana.nume != null) return false;
+        if (this.prenume != null ? !this.prenume.equals(persoana.prenume) : persoana.prenume != null) return false;
+        if (this.email != null ? !this.email.equals(persoana.email) : persoana.email != null) return false;
+        return this.tipPersoana == persoana.tipPersoana;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = this.id;
+        result = 31 * result + (int) (this.cnp ^ this.cnp >>> 32);
+        result = 31 * result + (this.nume != null ? this.nume.hashCode() : 0);
+        result = 31 * result + (this.prenume != null ? this.prenume.hashCode() : 0);
+        result = 31 * result + (this.email != null ? this.email.hashCode() : 0);
+        result = 31 * result + (int) (this.telefon ^ this.telefon >>> 32);
+        result = 31 * result + (this.tipPersoana != null ? this.tipPersoana.hashCode() : 0);
+        return result;
+    }
 }
