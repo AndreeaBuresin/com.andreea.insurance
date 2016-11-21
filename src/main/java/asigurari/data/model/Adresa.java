@@ -10,22 +10,22 @@ public class Adresa implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "oras",length = 20)
-    String oras;
+    private String oras;
 
     @Column(name = "strada", length = 20)
-    String strada;
+    private String strada;
 
     @Column(name = "numar", length = 11)
-    int numar;
+    private int numar;
 
     @JoinColumn(foreignKey = @ForeignKey(name = "idPersoana"))
-    String persoana;
+    private String persoana;
 
     @JoinColumn(foreignKey = @ForeignKey(name = "idPolitaAdress"))
-    String polita;
+    private String polita;
 
 
 

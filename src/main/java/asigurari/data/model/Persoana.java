@@ -10,7 +10,7 @@ public class Persoana implements Serializable{
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "cnp")
     private long cnp;

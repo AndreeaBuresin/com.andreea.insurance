@@ -12,6 +12,7 @@ import javax.persistence.EntityManagerFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -149,28 +150,28 @@ public class ApplicationMain {
                 option = Integer.parseInt(optionString);
                 if (option >= 1 && option <= 3) {
 
-                        switch (option) {
-                            case 1:
-                                for (TipPersoana tipulPersoana: TipPersoana.values()) {
-                                    tipulPersoana = TipPersoana.ANGAJAT;
-                                    tipulPersoana.setValue("Angajat");
-                                    persoana.setTipPersoana(tipulPersoana);
-                                }
-                                break;
-                            case 2:
+                    switch (option) {
+                        case 1:
+                            for (TipPersoana tipulPersoana : TipPersoana.values()) {
+                                tipulPersoana = TipPersoana.ANGAJAT;
+                                tipulPersoana.setValue("Angajat");
+                                persoana.setTipPersoana(tipulPersoana);
+                            }
+                            break;
+                        case 2:
 //                                for (TipPersoana tipPersoana : TipPersoana.values()) {
 //                                    tipPersoana = TipPersoana.COLABORATOR;
 //                                    tipPersoana.setValue("Colaborator");
 //                                    persoana.setTipPersoana(tipPersoana);
 //                                }
-                                break;
-                            case 3:
+                            break;
+                        case 3:
 //                                for (TipPersoana tipPersoana : TipPersoana.values()) {
 //                                    tipPersoana = TipPersoana.ASIGURAT;
 //                                    tipPersoana.setValue("Asigurat");
 //                                    persoana.setTipPersoana(tipPersoana);
 //                                }
-                                break;
+                            break;
                     }
                 } else {
                     System.out.println("Alegerea dvs nu este corecta!");
@@ -233,14 +234,56 @@ public class ApplicationMain {
         persoanaController.save(persoana);
     }
 
+    private void creazaPolita() throws Exception {
 
-    private void creazaPolita() {
+        Polita polita = new Polita();
+        boolean isValid;
+
+        LocalDate startDate = LocalDate.now();
+        polita.setDataInceput(startDate);
+        String endDate = read("Introduceti perioada valabilitatii(6luni/12luni): ");
 
 
-    }
+//        do {
+//            String dataInceput = read("Va rugam introduceti data de incepere a valabilitatii politei: ");
+//            if (Validation.dataValidation(dataInceput)) {
+//                isValid = true;
+//                LocalDate dataStart = LocalDate.parse(dataInceput);
+//                polita.setDataInceput(dataStart);
+//
+//                LocalDate dataSfarsit = new LocalDate(00, 00, 0000);
+//                dataSfarsit =
+//            } else {
+//                isValid = false;
+//                System.out.println("Aceasta data nu este valida!");
+//
+//            }
+//
+//        } while (isValid == false);
+
+
+                System.out.println(polita);
+                politaController.save(polita);
+        }
+
 
     private void adaugaVehicol() {
+        Vehicol vehicol = new Vehicol();
+        boolean isValid;
 
+        do {
+            String serieSasiuStr = read("Adaugati seria de sasiu"+
+                    "\n(aceasta trebuie sa fie formata din 17 caractere):\n");
+            if(Validation.serieSasiuValidation(serieSasiuStr)){
+                isValid = true;
+                long nrSerieSasiu = Long.parseLong(serieSasiuStr);
+                vehicol.setSerieSasiu(nrSerieSasiu);
+            }else {
+                isValid = false;
+                System.out.println("Aceasta serie nu este corecta!");
+            }
+
+        }while (isValid == false);
     }
 
     private void adaugaDespagubire() {
@@ -253,26 +296,31 @@ public class ApplicationMain {
 
     private void stergePersoana() throws Exception {
 
-        persoanaController.findAll();
-        String persoanaIdString;
+        System.out.println(persoanaController.findAll());
+        int orderId = Integer.parseInt(read("Alegeti id-ul persoanei pe care doriti sa o stergeti din baza de date: "));
+        Persoana persoana = persoanaController.findById(orderId);
 
-        do {
-            System.out.println("Introduceti id-ul persoanei pe care doriti sa o stergeti din baza de date: ");
-            System.out.println(persoanaController.findAll());
-            persoanaIdString = consoleReader.readLine();
+        persoanaController.delete(persoana);
 
-        } while (!Validation.isPositiveInt(persoanaIdString));
-        int persoanaId = Integer.parseInt(persoanaIdString);
-        Persoana persoana = persoanaController.findById(persoanaId);
-        if (persoana != null) {
-            persoanaController.delete(persoana);
-        } else {
-            System.out.println("Persoana cautata nu exista in baza noastra de date!");
-            stergePersoana();
-        }
+//        persoanaController.findAll();
+//        String persoanaIdString;
+//
+//        do {
+//            System.out.println("Introduceti id-ul persoanei pe care doriti sa o stergeti din baza de date: ");
+//            System.out.println(persoanaController.findAll());
+//            persoanaIdString = consoleReader.readLine();
+//
+//        } while (!Validation.isPositiveInt(persoanaIdString));
+//        int persoanaId = Integer.parseInt(persoanaIdString);
+//        Persoana persoana = persoanaController.findById(persoanaId);
+//        if (persoana != null) {
+//            persoanaController.delete(persoana);
+//        } else {
+//            System.out.println("Persoana cautata nu exista in baza noastra de date!");
+//            stergePersoana();
+//        }
 
     }
-
 
 
     private void modificaPolita() {

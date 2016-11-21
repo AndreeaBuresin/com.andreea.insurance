@@ -11,46 +11,46 @@ public class Vehicol implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "idSerieSasiu")
-    int serieSasiu;
+    private long serieSasiu;
 
     @Column(name = "nrIdentificare")
-    String nrIdentificare;
+    private String nrIdentificare;
 
     @Column(name = "marca")
-    String marca;
+    private String marca;
 
     @Column(name = "model")
-    String model;
+    private String model;
 
     @Column(name = "combustibil")
-    String combustibil;
+    private String combustibil;
 
     @Column(name = "cilindri")
-    int cilindri;
+    private int cilindri;
 
     @Column(name = "kw")
-    int kw;
+    private int kw;
 
     @Column(name = "masaMaxAsigurata")
-    int masaMaxAutorizata;
+    private int masaMaxAutorizata;
 
     @Column(name = "dataFabricatie")
-    LocalDate dataFabricatie;
+    private LocalDate dataFabricatie;
 
     @Column(name = "accident")
-    int accident;
+    private int accident;
 
     @Column(name = "sumaAsigurata")
-    double sumaAsigurata;
+    private double sumaAsigurata;
 
-    public int getSerieSasiu() {
+    public long getSerieSasiu() {
         return serieSasiu;
     }
 
-    public void setSerieSasiu(int serieSasiu) {
+    public void setSerieSasiu(long serieSasiu) {
         this.serieSasiu = serieSasiu;
     }
 

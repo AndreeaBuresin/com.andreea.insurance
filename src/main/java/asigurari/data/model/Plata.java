@@ -10,21 +10,21 @@ public class Plata implements Serializable {
     @Id
     @Column(name = "idplati", length = 11)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "salar")
-    double salar;
+    private double salar;
 
     @Column(name = "comisionS")
-    double comisionS;
+    private double comisionS;
 
     @Column(name = "comision")
-    double comision;
+    private double comision;
 
     @JoinColumn(foreignKey = @ForeignKey(name = "despagubireId"))
-    String despagubire;
+    private String despagubire;
     @JoinColumn(foreignKey = @ForeignKey(name = "persoanaPlatitaId"))
-    String persoana;
+    private String persoana;
 
     public int getId() {
         return id;

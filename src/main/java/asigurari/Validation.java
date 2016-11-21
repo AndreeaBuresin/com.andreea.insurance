@@ -102,4 +102,11 @@ public class Validation {
         return false;
     }
 
+    public static boolean serieSasiuValidation(String serieSasiu) {
+        if (serieSasiu.matches("([a-zA-Z0-9]*)")
+                && serieSasiu.length() == 17) {
+            return true;
+        }
+        return false;
+    }
 }

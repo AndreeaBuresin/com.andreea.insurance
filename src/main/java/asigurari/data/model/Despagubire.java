@@ -11,21 +11,21 @@ public class Despagubire implements Serializable{
     @Id
     @Column(name = "iddespagubire", length = 11)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "dataDespagubire")
-    LocalDate data;
+    private LocalDate data;
 
     @Column(name = "sumaDespagubire")
-    double sumaDespagubire;
+    private double sumaDespagubire;
 
     @Column(name = "descriereAvarii")
-    String descriereAvarii;
+    private String descriereAvarii;
 
     @JoinColumn(foreignKey = @ForeignKey(name = "idPolitaValabila"))
-    String polita;
+    private String polita;
     @JoinColumn(foreignKey = @ForeignKey(name = "idPersoanaImplicata"))
-    String persoana;
+    private String persoana;
 
 
     public int getId() {

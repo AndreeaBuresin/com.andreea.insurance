@@ -10,20 +10,20 @@ public class Polita {
     @Id
     @Column(name = "idpolita", length = 11)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "dataInceput")
-    LocalDate dataInceput;
+    private  LocalDate dataInceput;
 
     @Column(name = "dataSfarsit")
-    LocalDate dataSfarsit;
+    private  LocalDate dataSfarsit;
 
     @JoinColumn(foreignKey = @ForeignKey(name = "nrChitanta"))
-    String chitanta;
+    private  String chitanta;
     @JoinColumn(foreignKey = @ForeignKey(name = "vehicolId"))
-    String vehicol;
+    private String vehicol;
     @JoinColumn(foreignKey = @ForeignKey(name = "idAsigurat"))
-    String asigurat;
+    private String asigurat;
 
     public int getId() {
         return id;

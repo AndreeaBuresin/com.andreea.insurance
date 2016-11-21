@@ -11,24 +11,24 @@ public class Chitanta implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @Column(name = "data")
-    LocalDate data;
+    private LocalDate data;
 
     @Column(name = "suma")
-    double suma;
+    private double suma;
 
     @Column(name = "descriere")
-    String descriere;
+    private String descriere;
 
     @Column(name = "discount")
-    double discount;
+    private double discount;
 
     @JoinColumn(foreignKey = @ForeignKey(name = "persoanaId"))
-    String persoanaChitanta;
+    private String persoanaChitanta;
     @JoinColumn(foreignKey = @ForeignKey(name = "politaId"))
-    String politaChitanta;
+    private String politaChitanta;
 
     public int getId() {
         return id;
