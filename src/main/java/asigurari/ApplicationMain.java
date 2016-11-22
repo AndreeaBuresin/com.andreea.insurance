@@ -26,6 +26,7 @@ public class ApplicationMain {
 
         ApplicationMain application = new ApplicationMain();
         application.run();
+
     }
 
     ApplicationMain() {
@@ -153,8 +154,8 @@ public class ApplicationMain {
                     switch (option) {
                         case 1:
                             for (TipPersoana tipulPersoana : TipPersoana.values()) {
-                                tipulPersoana = TipPersoana.ANGAJAT;
                                 tipulPersoana.setValue("Angajat");
+                                tipulPersoana = TipPersoana.ANGAJAT;
                                 persoana.setTipPersoana(tipulPersoana);
                             }
                             break;
@@ -262,29 +263,146 @@ public class ApplicationMain {
 //        } while (isValid == false);
 
 
-                System.out.println(polita);
-                politaController.save(polita);
-        }
+        System.out.println(polita);
+        politaController.save(polita);
+    }
 
 
-    private void adaugaVehicol() {
+    private void adaugaVehicol() throws Exception {
         Vehicol vehicol = new Vehicol();
         boolean isValid;
 
         do {
-            String serieSasiuStr = read("Adaugati seria de sasiu"+
+            String serieSasiuStr = read("Adaugati seria de sasiu" +
                     "\n(aceasta trebuie sa fie formata din 17 caractere):\n");
-            if(Validation.serieSasiuValidation(serieSasiuStr)){
+            if (Validation.serieSasiuValidation(serieSasiuStr)) {
                 isValid = true;
-                long nrSerieSasiu = Long.parseLong(serieSasiuStr);
-                vehicol.setSerieSasiu(nrSerieSasiu);
-            }else {
+                vehicol.setSerieSasiu(serieSasiuStr);
+            } else {
                 isValid = false;
                 System.out.println("Aceasta serie nu este corecta!");
             }
 
-        }while (isValid == false);
+        } while (isValid == false);
+
+        do {
+            String nrInmatriculare = read("Introduceti numarul de inmatriculare al vehicolului" +
+                    "\n(acesta trebuie sa contina indexul de judet, doua numere si 3 caractere de identificare):\n");
+            if (Validation.nrIdentificareValidation(nrInmatriculare)) {
+                isValid = true;
+                vehicol.setNrIdentificare(nrInmatriculare);
+            }
+        } while (isValid == false);
+
+        do {
+            String marca = read("Introduceti marca vehicolului: ");
+            if (Validation.nameValidation(marca)) {
+                isValid = true;
+                vehicol.setMarca(marca);
+            }
+        } while (isValid == false);
+
+        do {
+            String model = read("Introduceti marca vehicolului: ");
+            if (Validation.serieSasiuValidation(model)) {
+                isValid = true;
+                vehicol.setMarca(model);
+            }
+        } while (isValid == false);
+
+        do {
+
+            System.out.println("Va rugam alegeti o optiune din meniul de mai jos.");
+            System.out.println("(1) BENZINA");
+            System.out.println("(2) MOTORINA");
+            System.out.println("(3) ELECTRIC");
+            System.out.println("(4) GPL");
+            System.out.println("(5) Exit from this menu.");
+
+            Scanner scan = new Scanner(System.in);
+            String optionString = scan.next();
+            int option = 0;
+            if (Validation.isPositiveInt(optionString)) {
+                option = Integer.parseInt(optionString);
+                if (option >= 1 && option <= 5) {
+
+                    switch (option) {
+                        case 1: {
+                            String benzina = "BENZINA";
+                            vehicol.setCombustibil(benzina);
+                            break;
+                        }
+                        case 2: {
+                            String motorina = "MOTORINA";
+                            vehicol.setCombustibil(motorina);
+                            break;
+                        }
+                        case 3: {
+                            String electric = "ELECTRIC";
+                            vehicol.setCombustibil(electric);
+                            break;
+                        }
+                        case 4: {
+                            String gpl = "GPL";
+                            vehicol.setCombustibil(gpl);
+                            break;
+                        }
+                        case 5:
+                            return;
+                    }
+
+                } else {
+                    System.out.println("Your option doesn't exist in the menu above. Please chose again.");
+                    break;
+                }
+
+            } else {
+                System.out.println("Your option is not a valid number. Please try again.");
+                break;
+            }
+            while (option != 5) ;
+        }
+        while (isValid == false);
+
+        do {
+            String cilindriiS = read("Introduceti cilindrii motor vehicol: ");
+
+            if (Validation.isPositiveInt(cilindriiS)) {
+                isValid = true;
+                int cilindrii = Integer.parseInt(cilindriiS);
+                vehicol.setCilindri(cilindrii);
+            }
+        } while (isValid == false);
+
+        do {
+            String kwS = read("Introduceti cilindrii motor vehicol: ");
+
+            if (Validation.isPositiveInt(kwS)) {
+                isValid = true;
+                int kw = Integer.parseInt(kwS);
+
+                vehicol.setCilindri(kw);
+            }else{
+                System.out.println("Numarul introdus nu este valid");
+            }
+        } while (isValid == false);
+
+        do {
+            String kwS = read("Introduceti masa maxima autorizata a vehicolului: ");
+
+            if (Validation.isPositiveInt(kwS)) {
+                isValid = true;
+                int kw = Integer.parseInt(kwS);
+
+                vehicol.setCilindri(kw);
+            }else{
+                System.out.println("Greutatea introdusa nu este valida");
+
+        } while (isValid == false);
+
+        vehicolController.save(vehicol);
     }
+
 
     private void adaugaDespagubire() {
 

@@ -14,7 +14,7 @@ public class Vehicol implements Serializable {
     private int id;
 
     @Column(name = "idSerieSasiu")
-    private long serieSasiu;
+    private String serieSasiu;
 
     @Column(name = "nrIdentificare")
     private String nrIdentificare;
@@ -46,11 +46,11 @@ public class Vehicol implements Serializable {
     @Column(name = "sumaAsigurata")
     private double sumaAsigurata;
 
-    public long getSerieSasiu() {
+    public String getSerieSasiu() {
         return serieSasiu;
     }
 
-    public void setSerieSasiu(long serieSasiu) {
+    public void setSerieSasiu(String serieSasiu) {
         this.serieSasiu = serieSasiu;
     }
 
