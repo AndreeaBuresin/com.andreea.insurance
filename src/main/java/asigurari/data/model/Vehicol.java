@@ -46,6 +46,24 @@ public class Vehicol implements Serializable {
     @Column(name = "sumaAsigurata")
     private double sumaAsigurata;
 
+    private Persoana persoana;
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Persoana getPersoana() {
+        return this.persoana;
+    }
+
+    public void setPersoana(Persoana persoana) {
+        this.persoana = persoana;
+    }
+
     public String getSerieSasiu() {
         return serieSasiu;
     }
@@ -137,7 +155,8 @@ public class Vehicol implements Serializable {
     @Override
     public String toString() {
         return "Vehicol{" +
-                "serieSasiu=" + serieSasiu +
+                "id=" + id +
+                ", serieSasiu='" + serieSasiu + '\'' +
                 ", nrIdentificare='" + nrIdentificare + '\'' +
                 ", marca='" + marca + '\'' +
                 ", model='" + model + '\'' +
@@ -148,6 +167,7 @@ public class Vehicol implements Serializable {
                 ", dataFabricatie=" + dataFabricatie +
                 ", accident=" + accident +
                 ", sumaAsigurata=" + sumaAsigurata +
+                ", persoana=" + persoana +
                 '}';
     }
 }

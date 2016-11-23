@@ -262,7 +262,6 @@ public class ApplicationMain {
 //
 //        } while (isValid == false);
 
-
         System.out.println(polita);
         politaController.save(polita);
     }
@@ -303,7 +302,7 @@ public class ApplicationMain {
         } while (isValid == false);
 
         do {
-            String model = read("Introduceti marca vehicolului: ");
+            String model = read("Introduceti modelul vehicolului: ");
             if (Validation.serieSasiuValidation(model)) {
                 isValid = true;
                 vehicol.setMarca(model);
@@ -350,14 +349,13 @@ public class ApplicationMain {
                         case 5:
                             return;
                     }
-
                 } else {
-                    System.out.println("Your option doesn't exist in the menu above. Please chose again.");
+                    System.out.println("Optiunea dvs nu exista in meniul de mai sus.");
                     break;
                 }
 
             } else {
-                System.out.println("Your option is not a valid number. Please try again.");
+                System.out.println("Optiunea dvs nu este un numar valid.");
                 break;
             }
             while (option != 5) ;
@@ -381,24 +379,53 @@ public class ApplicationMain {
                 isValid = true;
                 int kw = Integer.parseInt(kwS);
 
-                vehicol.setCilindri(kw);
+                vehicol.setKw(kw);
             }else{
                 System.out.println("Numarul introdus nu este valid");
             }
         } while (isValid == false);
 
         do {
-            String kwS = read("Introduceti masa maxima autorizata a vehicolului: ");
+            String mMaxAsig = read("Introduceti masa maxima autorizata, in kilograme, a vehicolului: ");
 
-            if (Validation.isPositiveInt(kwS)) {
+            if (Validation.isPositiveInt(mMaxAsig)) {
                 isValid = true;
-                int kw = Integer.parseInt(kwS);
+                int masaMaxAutorizata = Integer.parseInt(mMaxAsig);
 
-                vehicol.setCilindri(kw);
-            }else{
+                vehicol.setMasaMaxAutorizata(masaMaxAutorizata);
+            } else {
                 System.out.println("Greutatea introdusa nu este valida");
 
+            }
+
+        }while (isValid == false) ;
+
+        do {
+            String dataFabricatiei = read("Introduceti data de fabricatie a autovehicolului: ");
+            if (Validation.dataValidation(dataFabricatiei)) {
+                isValid = true;
+                String dataFabricatieiVehicol = dataFabricatiei;
+                Scanner scannDate = new Scanner(dataFabricatieiVehicol);
+                scannDate.useDelimiter("/");
+                String dayString = scannDate.next();
+                String monthString = scannDate.next();
+                String yearString = scannDate.next();
+                int day = Integer.parseInt(dayString);
+                int month = Integer.parseInt(monthString);
+                int year = Integer.parseInt(yearString);
+
+                LocalDate dataFabricatieiNew = LocalDate.of(year, month, day);
+                //System.out.println(dataFabricatieiNew);
+                vehicol.setDataFabricatie(dataFabricatieiNew);
+            } else {
+                isValid = false;
+                System.out.println("Data introdusa nu este valida!");
+            }
         } while (isValid == false);
+
+//        vehicol.setAccident();
+//        vehicol.setSumaAsigurata();
+//        vehicol.setPersoana();
 
         vehicolController.save(vehicol);
     }
@@ -493,7 +520,7 @@ public class ApplicationMain {
         System.out.println("0. Iesire din Program.");
         System.out.println("1. Adauga o persoana noua in baza de date.");
         System.out.println("2. Adauga o polita noua in baza de date.");
-        System.out.println("3. Adauga un veicol asigurat in baza de date.");
+        System.out.println("3. Adauga un vehicol asigurat in baza de date.");
         System.out.println("4. Adauga o despagubire noua in baza de date.");
         System.out.println("5. Adauga o plata noua in baza de date.");
         System.out.println("6. Sterge o persoana din baza de date.");
