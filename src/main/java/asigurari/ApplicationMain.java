@@ -231,7 +231,7 @@ public class ApplicationMain {
                 System.out.println("Aceasta adresa de e-mail nu este valida!");
             }
         } while (isValid == false);
-        System.out.println(persoana);
+        //System.out.println(persoana);
         persoanaController.save(persoana);
     }
 
@@ -316,19 +316,21 @@ public class ApplicationMain {
             System.out.println("(2) MOTORINA");
             System.out.println("(3) ELECTRIC");
             System.out.println("(4) GPL");
-            System.out.println("(5) Exit from this menu.");
+            //System.out.println("(5) Exit from this menu.");
 
             Scanner scan = new Scanner(System.in);
             String optionString = scan.next();
             int option = 0;
             if (Validation.isPositiveInt(optionString)) {
                 option = Integer.parseInt(optionString);
-                if (option >= 1 && option <= 5) {
+                if (option >= 1 && option <= 4) {
 
                     switch (option) {
                         case 1: {
                             String benzina = "BENZINA";
-                            vehicol.setCombustibil(benzina);
+                            if (option == 1) {
+                                vehicol.setCombustibil(benzina);
+                            }
                             break;
                         }
                         case 2: {
@@ -346,8 +348,7 @@ public class ApplicationMain {
                             vehicol.setCombustibil(gpl);
                             break;
                         }
-                        case 5:
-                            return;
+
                     }
                 } else {
                     System.out.println("Optiunea dvs nu exista in meniul de mai sus.");
@@ -358,7 +359,7 @@ public class ApplicationMain {
                 System.out.println("Optiunea dvs nu este un numar valid.");
                 break;
             }
-            while (option != 5) ;
+
         }
         while (isValid == false);
 
@@ -373,7 +374,7 @@ public class ApplicationMain {
         } while (isValid == false);
 
         do {
-            String kwS = read("Introduceti cilindrii motor vehicol: ");
+            String kwS = read("Introduceti putere kw motor vehicol: ");
 
             if (Validation.isPositiveInt(kwS)) {
                 isValid = true;
@@ -423,9 +424,29 @@ public class ApplicationMain {
             }
         } while (isValid == false);
 
+        List<Persoana> persoane = persoanaController.findAll();
+        do {
+            String sectionIdString = read("Va rugam sa introduceti id-ul proprietarului din lista data: ");
+            if (Validation.isPositiveInt(sectionIdString)) {
+                int sectionId = Integer.parseInt(sectionIdString);
+                Persoana persoana = persoanaController.findById(sectionId);
+                if (persoana == null) {
+                    isValid = false;
+                    System.out.println("Acest id nu se afla in baza de date, introduceti mai intai persoana " +
+                            "si apoi adaugati vehicolul in baza de date");
+                } else {
+                    isValid = true;
+                    vehicol.setPersoana(persoana);
+                }
+            } else {
+                isValid = false;
+                System.out.println("Va rugam introduceti un numar pozitiv: ");
+            }
+        } while (isValid == false);
+
+
 //        vehicol.setAccident();
 //        vehicol.setSumaAsigurata();
-//        vehicol.setPersoana();
 
         vehicolController.save(vehicol);
     }
