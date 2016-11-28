@@ -9,6 +9,8 @@ public interface IController<T> {
 
     T findById(int id) throws Exception;
 
+    T findByCnp(long cnp) throws Exception;
+
     List<T> findAll() throws Exception;
 
     List<T> findByColumn(String column, String property) throws Exception;

@@ -25,6 +25,11 @@ public class GenericRepository<T> implements IController<T> {
         return entityManager.find(clazz, id);
     }
 
+    public T findByCnp(long cnp){
+
+        return entityManager.find(clazz, cnp);
+    }
+
     public List<T> findAll(){
 
         CriteriaQuery<T> criteria = entityManager.getCriteriaBuilder().createQuery(clazz);

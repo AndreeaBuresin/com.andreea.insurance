@@ -426,10 +426,11 @@ public class ApplicationMain {
 
         List<Persoana> persoane = persoanaController.findAll();
         do {
-            String sectionIdString = read("Va rugam sa introduceti id-ul proprietarului din lista data: ");
+            System.out.println(persoane);
+            String sectionIdString = read("Va rugam sa introduceti cnp-ul proprietarului din lista data: ");
             if (Validation.isPositiveInt(sectionIdString)) {
                 int sectionId = Integer.parseInt(sectionIdString);
-                Persoana persoana = persoanaController.findById(sectionId);
+                Persoana persoana = persoanaController.findByCnp(sectionId);
                 if (persoana == null) {
                     isValid = false;
                     System.out.println("Acest id nu se afla in baza de date, introduceti mai intai persoana " +

@@ -15,6 +15,9 @@ public class GenericController<T> implements IController<T>{
     public T findById(int id) throws Exception{
         return repository.findById(id);
     }
+    public T findByCnp(long cnp) throws Exception {
+        return repository.findByCnp(cnp);
+    }
 
     public List<T> findAll() throws Exception {
         return repository.findAll();
