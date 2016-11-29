@@ -424,24 +424,24 @@ public class ApplicationMain {
             }
         } while (isValid == false);
 
-        List<Persoana> persoane = persoanaController.findAll();
+
         do {
+            List<Persoana> persoane = persoanaController.findAll();
             System.out.println(persoane);
-            String sectionIdString = read("Va rugam sa introduceti cnp-ul proprietarului din lista data: ");
-            if (Validation.isPositiveInt(sectionIdString)) {
-                int sectionId = Integer.parseInt(sectionIdString);
-                Persoana persoana = persoanaController.findByCnp(sectionId);
-                if (persoana == null) {
+            String sectionCnpString = read("Va rugam sa introduceti cnp-ul proprietarului din lista data: ");
+            if (Validation.cnpValidation(sectionCnpString)) {
+                long sectionCnp = Long.parseLong(sectionCnpString);
+                Persoana persoanaCnp = persoanaController.findByCnp(sectionCnp);
+                if (persoanaCnp == null) {
                     isValid = false;
-                    System.out.println("Acest id nu se afla in baza de date, introduceti mai intai persoana " +
-                            "si apoi adaugati vehicolul in baza de date");
+                    System.out.println("Acest cnp nu se afla in baza de date, introduceti un cnp din lista data!");
                 } else {
                     isValid = true;
-                    vehicol.setPersoana(persoana);
+                    vehicol.setPersoana(persoanaCnp);
                 }
             } else {
                 isValid = false;
-                System.out.println("Va rugam introduceti un numar pozitiv: ");
+                System.out.println("Va rugam introduceti un cnp valid: ");
             }
         } while (isValid == false);
 
