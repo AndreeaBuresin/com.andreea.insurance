@@ -426,12 +426,12 @@ public class ApplicationMain {
 
 
         do {
-            List<Persoana> persoane = persoanaController.findAll();
-            System.out.println(persoane);
+            System.out.println(persoanaController.findAll());
             String sectionCnpString = read("Va rugam sa introduceti cnp-ul proprietarului din lista data: ");
             if (Validation.cnpValidation(sectionCnpString)) {
-                long sectionCnp = Long.parseLong(sectionCnpString);
-                Persoana persoanaCnp = persoanaController.findByCnp(sectionCnp);
+                //long sectionCnp = Long.parseLong(sectionCnpString);
+               // List<Persoana> persoane = persoanaController.findByCnp(sectionCnp);
+                Persoana persoanaCnp = persoanaController.findByCnp(Long.parseLong(sectionCnpString));
                 if (persoanaCnp == null) {
                     isValid = false;
                     System.out.println("Acest cnp nu se afla in baza de date, introduceti un cnp din lista data!");
