@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Plata implements Serializable {
 
     @Id
-    @Column(name = "idplati", length = 11)
+    @Column(name = "id", length = 11)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

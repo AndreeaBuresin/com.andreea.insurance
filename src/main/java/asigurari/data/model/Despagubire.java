@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Despagubire implements Serializable{
 
     @Id
-    @Column(name = "iddespagubire", length = 11)
+    @Column(name = "id", length = 11)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 

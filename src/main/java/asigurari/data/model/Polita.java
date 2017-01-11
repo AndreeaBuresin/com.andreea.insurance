@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Polita {
 
     @Id
-    @Column(name = "idpolita", length = 11)
+    @Column(name = "id", length = 11)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
